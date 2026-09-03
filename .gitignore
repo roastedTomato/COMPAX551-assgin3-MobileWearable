@@ -1,0 +1,18 @@
+# Android / Gradle build files
+.gradle/
+build/
+*/build/
+
+# APK / generated outputs
+*.apk
+*.aab
+
+# Java heap dump / crash files
+*.hprof
+
+# IDE files
+.idea/
+*.iml
+
+# macOS
+.DS_Store

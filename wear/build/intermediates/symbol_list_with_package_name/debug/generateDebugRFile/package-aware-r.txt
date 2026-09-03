@@ -1,0 +1,2 @@
+com.example.assign3.wear
+string app_name

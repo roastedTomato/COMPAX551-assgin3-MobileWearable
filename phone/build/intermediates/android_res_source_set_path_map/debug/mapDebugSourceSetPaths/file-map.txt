@@ -1,0 +1,8 @@
+com.example.assign3.phone-pngs-0 /Users/eva/Documents/Assignments/COMPX551/Assign3Mobile and Wearable Computing/Assign3MobileWearable/phone/build/generated/res/pngs/debug
+com.example.assign3.phone-updated_navigation_xml-1 /Users/eva/Documents/Assignments/COMPX551/Assign3Mobile and Wearable Computing/Assign3MobileWearable/phone/build/generated/updated_navigation_xml/debug
+com.example.assign3.phone-packageDebugResources-2 /Users/eva/Documents/Assignments/COMPX551/Assign3Mobile and Wearable Computing/Assign3MobileWearable/phone/build/intermediates/incremental/debug/packageDebugResources/merged.dir
+com.example.assign3.phone-packageDebugResources-3 /Users/eva/Documents/Assignments/COMPX551/Assign3Mobile and Wearable Computing/Assign3MobileWearable/phone/build/intermediates/incremental/debug/packageDebugResources/stripped.dir
+com.example.assign3.phone-debug-4 /Users/eva/Documents/Assignments/COMPX551/Assign3Mobile and Wearable Computing/Assign3MobileWearable/phone/build/intermediates/merged_res/debug/mergeDebugResources
+com.example.assign3.phone-debug-5 /Users/eva/Documents/Assignments/COMPX551/Assign3Mobile and Wearable Computing/Assign3MobileWearable/phone/src/debug/res
+com.example.assign3.phone-main-6 /Users/eva/Documents/Assignments/COMPX551/Assign3Mobile and Wearable Computing/Assign3MobileWearable/phone/src/main/res
+gradleHome-0 /Users/eva/.gradle
