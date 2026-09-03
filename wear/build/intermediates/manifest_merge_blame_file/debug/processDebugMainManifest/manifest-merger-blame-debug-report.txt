@@ -59,172 +59,173 @@
 34-->/Users/eva/Documents/Assignments/COMPX551/Assign3Mobile and Wearable Computing/Assign3MobileWearable/wear/src/main/AndroidManifest.xml:14:9-41
 35        android:supportsRtl="true"
 35-->/Users/eva/Documents/Assignments/COMPX551/Assign3Mobile and Wearable Computing/Assign3MobileWearable/wear/src/main/AndroidManifest.xml:15:9-35
-36        android:theme="@android:style/Theme.DeviceDefault" >
-36-->/Users/eva/Documents/Assignments/COMPX551/Assign3Mobile and Wearable Computing/Assign3MobileWearable/wear/src/main/AndroidManifest.xml:16:9-59
-37        <uses-library
-37-->/Users/eva/Documents/Assignments/COMPX551/Assign3Mobile and Wearable Computing/Assign3MobileWearable/wear/src/main/AndroidManifest.xml:17:9-19:39
-38            android:name="com.google.android.wearable"
-38-->/Users/eva/Documents/Assignments/COMPX551/Assign3Mobile and Wearable Computing/Assign3MobileWearable/wear/src/main/AndroidManifest.xml:18:13-55
-39            android:required="true" />
-39-->/Users/eva/Documents/Assignments/COMPX551/Assign3Mobile and Wearable Computing/Assign3MobileWearable/wear/src/main/AndroidManifest.xml:19:13-36
-40        <uses-library
-40-->/Users/eva/Documents/Assignments/COMPX551/Assign3Mobile and Wearable Computing/Assign3MobileWearable/wear/src/main/AndroidManifest.xml:20:9-22:40
-41            android:name="wear-sdk"
-41-->/Users/eva/Documents/Assignments/COMPX551/Assign3Mobile and Wearable Computing/Assign3MobileWearable/wear/src/main/AndroidManifest.xml:21:13-36
-42            android:required="false" />
-42-->/Users/eva/Documents/Assignments/COMPX551/Assign3Mobile and Wearable Computing/Assign3MobileWearable/wear/src/main/AndroidManifest.xml:22:13-37
-43
-44        <meta-data
-44-->/Users/eva/Documents/Assignments/COMPX551/Assign3Mobile and Wearable Computing/Assign3MobileWearable/wear/src/main/AndroidManifest.xml:24:9-26:37
-45            android:name="com.google.android.wearable.standalone"
-45-->/Users/eva/Documents/Assignments/COMPX551/Assign3Mobile and Wearable Computing/Assign3MobileWearable/wear/src/main/AndroidManifest.xml:25:13-66
-46            android:value="false" />
-46-->/Users/eva/Documents/Assignments/COMPX551/Assign3Mobile and Wearable Computing/Assign3MobileWearable/wear/src/main/AndroidManifest.xml:26:13-34
-47
-48        <activity
-48-->/Users/eva/Documents/Assignments/COMPX551/Assign3Mobile and Wearable Computing/Assign3MobileWearable/wear/src/main/AndroidManifest.xml:28:9-36:20
-49            android:name="com.example.assign3.wear.presentation.MainActivity"
-49-->/Users/eva/Documents/Assignments/COMPX551/Assign3Mobile and Wearable Computing/Assign3MobileWearable/wear/src/main/AndroidManifest.xml:29:13-54
-50            android:exported="true"
-50-->/Users/eva/Documents/Assignments/COMPX551/Assign3Mobile and Wearable Computing/Assign3MobileWearable/wear/src/main/AndroidManifest.xml:30:13-36
-51            android:taskAffinity="" >
-51-->/Users/eva/Documents/Assignments/COMPX551/Assign3Mobile and Wearable Computing/Assign3MobileWearable/wear/src/main/AndroidManifest.xml:31:13-36
-52            <intent-filter>
-52-->/Users/eva/Documents/Assignments/COMPX551/Assign3Mobile and Wearable Computing/Assign3MobileWearable/wear/src/main/AndroidManifest.xml:32:13-35:29
-53                <action android:name="android.intent.action.MAIN" />
-53-->/Users/eva/Documents/Assignments/COMPX551/Assign3Mobile and Wearable Computing/Assign3MobileWearable/wear/src/main/AndroidManifest.xml:33:17-69
-53-->/Users/eva/Documents/Assignments/COMPX551/Assign3Mobile and Wearable Computing/Assign3MobileWearable/wear/src/main/AndroidManifest.xml:33:25-66
-54
-55                <category android:name="android.intent.category.LAUNCHER" />
-55-->/Users/eva/Documents/Assignments/COMPX551/Assign3Mobile and Wearable Computing/Assign3MobileWearable/wear/src/main/AndroidManifest.xml:34:17-77
-55-->/Users/eva/Documents/Assignments/COMPX551/Assign3Mobile and Wearable Computing/Assign3MobileWearable/wear/src/main/AndroidManifest.xml:34:27-74
-56            </intent-filter>
-57        </activity>
-58        <activity
-58-->[androidx.compose.ui:ui-tooling-android:1.10.4] /Users/eva/.gradle/caches/9.4.1/transforms/b0d433cb91b70f72a01069b27496b1a5/transformed/ui-tooling/AndroidManifest.xml:23:9-25:39
-59            android:name="androidx.compose.ui.tooling.PreviewActivity"
-59-->[androidx.compose.ui:ui-tooling-android:1.10.4] /Users/eva/.gradle/caches/9.4.1/transforms/b0d433cb91b70f72a01069b27496b1a5/transformed/ui-tooling/AndroidManifest.xml:24:13-71
-60            android:exported="true" />
-60-->[androidx.compose.ui:ui-tooling-android:1.10.4] /Users/eva/.gradle/caches/9.4.1/transforms/b0d433cb91b70f72a01069b27496b1a5/transformed/ui-tooling/AndroidManifest.xml:25:13-36
-61        <activity
-61-->[androidx.compose.ui:ui-test-manifest:1.10.4] /Users/eva/.gradle/caches/9.4.1/transforms/e5f3aa2a5eb264c5b036941aa6ced075/transformed/ui-test-manifest-1.10.4/AndroidManifest.xml:23:9-26:79
-62            android:name="androidx.activity.ComponentActivity"
-62-->[androidx.compose.ui:ui-test-manifest:1.10.4] /Users/eva/.gradle/caches/9.4.1/transforms/e5f3aa2a5eb264c5b036941aa6ced075/transformed/ui-test-manifest-1.10.4/AndroidManifest.xml:24:13-63
-63            android:exported="true"
-63-->[androidx.compose.ui:ui-test-manifest:1.10.4] /Users/eva/.gradle/caches/9.4.1/transforms/e5f3aa2a5eb264c5b036941aa6ced075/transformed/ui-test-manifest-1.10.4/AndroidManifest.xml:25:13-36
-64            android:theme="@android:style/Theme.Material.Light.NoActionBar" />
-64-->[androidx.compose.ui:ui-test-manifest:1.10.4] /Users/eva/.gradle/caches/9.4.1/transforms/e5f3aa2a5eb264c5b036941aa6ced075/transformed/ui-test-manifest-1.10.4/AndroidManifest.xml:26:13-76
-65
-66        <service
-66-->[androidx.health:health-services-client:1.1.0-rc02] /Users/eva/.gradle/caches/9.4.1/transforms/4a55815477509852c86baeaf8af6b220/transformed/health-services-client-1.1.0-rc02/AndroidManifest.xml:24:9-31:19
-67            android:name="androidx.health.services.client.VersionApiService"
-67-->[androidx.health:health-services-client:1.1.0-rc02] /Users/eva/.gradle/caches/9.4.1/transforms/4a55815477509852c86baeaf8af6b220/transformed/health-services-client-1.1.0-rc02/AndroidManifest.xml:25:13-77
-68            android:exported="true"
-68-->[androidx.health:health-services-client:1.1.0-rc02] /Users/eva/.gradle/caches/9.4.1/transforms/4a55815477509852c86baeaf8af6b220/transformed/health-services-client-1.1.0-rc02/AndroidManifest.xml:26:13-36
-69            android:permission="com.google.android.wearable.healthservices.permission.PASSIVE_DATA_BINDING" >
-69-->[androidx.health:health-services-client:1.1.0-rc02] /Users/eva/.gradle/caches/9.4.1/transforms/4a55815477509852c86baeaf8af6b220/transformed/health-services-client-1.1.0-rc02/AndroidManifest.xml:27:13-108
-70            <intent-filter>
-70-->[androidx.health:health-services-client:1.1.0-rc02] /Users/eva/.gradle/caches/9.4.1/transforms/4a55815477509852c86baeaf8af6b220/transformed/health-services-client-1.1.0-rc02/AndroidManifest.xml:28:13-30:29
-71                <action android:name="hs.versionclient.BIND" />
-71-->[androidx.health:health-services-client:1.1.0-rc02] /Users/eva/.gradle/caches/9.4.1/transforms/4a55815477509852c86baeaf8af6b220/transformed/health-services-client-1.1.0-rc02/AndroidManifest.xml:29:17-64
-71-->[androidx.health:health-services-client:1.1.0-rc02] /Users/eva/.gradle/caches/9.4.1/transforms/4a55815477509852c86baeaf8af6b220/transformed/health-services-client-1.1.0-rc02/AndroidManifest.xml:29:25-61
-72            </intent-filter>
-73        </service>
-74
-75        <activity
-75-->[com.google.android.gms:play-services-base:18.0.1] /Users/eva/.gradle/caches/9.4.1/transforms/464985688a25f035f63ea9f5a4eda53f/transformed/play-services-base-18.0.1/AndroidManifest.xml:20:9-22:45
-76            android:name="com.google.android.gms.common.api.GoogleApiActivity"
-76-->[com.google.android.gms:play-services-base:18.0.1] /Users/eva/.gradle/caches/9.4.1/transforms/464985688a25f035f63ea9f5a4eda53f/transformed/play-services-base-18.0.1/AndroidManifest.xml:20:19-85
-77            android:exported="false"
-77-->[com.google.android.gms:play-services-base:18.0.1] /Users/eva/.gradle/caches/9.4.1/transforms/464985688a25f035f63ea9f5a4eda53f/transformed/play-services-base-18.0.1/AndroidManifest.xml:22:19-43
-78            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-78-->[com.google.android.gms:play-services-base:18.0.1] /Users/eva/.gradle/caches/9.4.1/transforms/464985688a25f035f63ea9f5a4eda53f/transformed/play-services-base-18.0.1/AndroidManifest.xml:21:19-78
-79
-80        <meta-data
-80-->[com.google.android.gms:play-services-basement:18.0.0] /Users/eva/.gradle/caches/9.4.1/transforms/ee15a9815fde8d29bdd882a9f24d58f9/transformed/play-services-basement-18.0.0/AndroidManifest.xml:21:9-23:69
-81            android:name="com.google.android.gms.version"
-81-->[com.google.android.gms:play-services-basement:18.0.0] /Users/eva/.gradle/caches/9.4.1/transforms/ee15a9815fde8d29bdd882a9f24d58f9/transformed/play-services-basement-18.0.0/AndroidManifest.xml:22:13-58
-82            android:value="@integer/google_play_services_version" />
-82-->[com.google.android.gms:play-services-basement:18.0.0] /Users/eva/.gradle/caches/9.4.1/transforms/ee15a9815fde8d29bdd882a9f24d58f9/transformed/play-services-basement-18.0.0/AndroidManifest.xml:23:13-66
-83
-84        <provider
-84-->[androidx.emoji2:emoji2:1.4.0] /Users/eva/.gradle/caches/9.4.1/transforms/f9bb3d95a2132adffbe20390b2c0df18/transformed/emoji2-1.4.0/AndroidManifest.xml:24:9-32:20
-85            android:name="androidx.startup.InitializationProvider"
-85-->[androidx.emoji2:emoji2:1.4.0] /Users/eva/.gradle/caches/9.4.1/transforms/f9bb3d95a2132adffbe20390b2c0df18/transformed/emoji2-1.4.0/AndroidManifest.xml:25:13-67
-86            android:authorities="com.example.assign3.wear.androidx-startup"
-86-->[androidx.emoji2:emoji2:1.4.0] /Users/eva/.gradle/caches/9.4.1/transforms/f9bb3d95a2132adffbe20390b2c0df18/transformed/emoji2-1.4.0/AndroidManifest.xml:26:13-68
-87            android:exported="false" >
-87-->[androidx.emoji2:emoji2:1.4.0] /Users/eva/.gradle/caches/9.4.1/transforms/f9bb3d95a2132adffbe20390b2c0df18/transformed/emoji2-1.4.0/AndroidManifest.xml:27:13-37
-88            <meta-data
-88-->[androidx.emoji2:emoji2:1.4.0] /Users/eva/.gradle/caches/9.4.1/transforms/f9bb3d95a2132adffbe20390b2c0df18/transformed/emoji2-1.4.0/AndroidManifest.xml:29:13-31:52
-89                android:name="androidx.emoji2.text.EmojiCompatInitializer"
-89-->[androidx.emoji2:emoji2:1.4.0] /Users/eva/.gradle/caches/9.4.1/transforms/f9bb3d95a2132adffbe20390b2c0df18/transformed/emoji2-1.4.0/AndroidManifest.xml:30:17-75
-90                android:value="androidx.startup" />
-90-->[androidx.emoji2:emoji2:1.4.0] /Users/eva/.gradle/caches/9.4.1/transforms/f9bb3d95a2132adffbe20390b2c0df18/transformed/emoji2-1.4.0/AndroidManifest.xml:31:17-49
-91            <meta-data
-91-->[androidx.lifecycle:lifecycle-process:2.9.4] /Users/eva/.gradle/caches/9.4.1/transforms/6000b8c95fda8297e1df1e65eb501641/transformed/lifecycle-process-2.9.4/AndroidManifest.xml:29:13-31:52
-92                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
-92-->[androidx.lifecycle:lifecycle-process:2.9.4] /Users/eva/.gradle/caches/9.4.1/transforms/6000b8c95fda8297e1df1e65eb501641/transformed/lifecycle-process-2.9.4/AndroidManifest.xml:30:17-78
-93                android:value="androidx.startup" />
-93-->[androidx.lifecycle:lifecycle-process:2.9.4] /Users/eva/.gradle/caches/9.4.1/transforms/6000b8c95fda8297e1df1e65eb501641/transformed/lifecycle-process-2.9.4/AndroidManifest.xml:31:17-49
-94            <meta-data
-94-->[androidx.profileinstaller:profileinstaller:1.4.0] /Users/eva/.gradle/caches/9.4.1/transforms/5adb68cc6c9071799bc45d6344f39e54/transformed/profileinstaller-1.4.0/AndroidManifest.xml:29:13-31:52
-95                android:name="androidx.profileinstaller.ProfileInstallerInitializer"
-95-->[androidx.profileinstaller:profileinstaller:1.4.0] /Users/eva/.gradle/caches/9.4.1/transforms/5adb68cc6c9071799bc45d6344f39e54/transformed/profileinstaller-1.4.0/AndroidManifest.xml:30:17-85
-96                android:value="androidx.startup" />
-96-->[androidx.profileinstaller:profileinstaller:1.4.0] /Users/eva/.gradle/caches/9.4.1/transforms/5adb68cc6c9071799bc45d6344f39e54/transformed/profileinstaller-1.4.0/AndroidManifest.xml:31:17-49
-97        </provider>
-98
-99        <uses-library
-99-->[androidx.window:window:1.5.0] /Users/eva/.gradle/caches/9.4.1/transforms/b75ce9f8244c1e5c34343d8d69aefab8/transformed/window-1.5.0/AndroidManifest.xml:23:9-25:40
-100            android:name="androidx.window.extensions"
-100-->[androidx.window:window:1.5.0] /Users/eva/.gradle/caches/9.4.1/transforms/b75ce9f8244c1e5c34343d8d69aefab8/transformed/window-1.5.0/AndroidManifest.xml:24:13-54
-101            android:required="false" />
-101-->[androidx.window:window:1.5.0] /Users/eva/.gradle/caches/9.4.1/transforms/b75ce9f8244c1e5c34343d8d69aefab8/transformed/window-1.5.0/AndroidManifest.xml:25:13-37
-102        <uses-library
-102-->[androidx.window:window:1.5.0] /Users/eva/.gradle/caches/9.4.1/transforms/b75ce9f8244c1e5c34343d8d69aefab8/transformed/window-1.5.0/AndroidManifest.xml:26:9-28:40
-103            android:name="androidx.window.sidecar"
-103-->[androidx.window:window:1.5.0] /Users/eva/.gradle/caches/9.4.1/transforms/b75ce9f8244c1e5c34343d8d69aefab8/transformed/window-1.5.0/AndroidManifest.xml:27:13-51
-104            android:required="false" />
-104-->[androidx.window:window:1.5.0] /Users/eva/.gradle/caches/9.4.1/transforms/b75ce9f8244c1e5c34343d8d69aefab8/transformed/window-1.5.0/AndroidManifest.xml:28:13-37
-105
-106        <receiver
-106-->[androidx.profileinstaller:profileinstaller:1.4.0] /Users/eva/.gradle/caches/9.4.1/transforms/5adb68cc6c9071799bc45d6344f39e54/transformed/profileinstaller-1.4.0/AndroidManifest.xml:34:9-52:20
-107            android:name="androidx.profileinstaller.ProfileInstallReceiver"
-107-->[androidx.profileinstaller:profileinstaller:1.4.0] /Users/eva/.gradle/caches/9.4.1/transforms/5adb68cc6c9071799bc45d6344f39e54/transformed/profileinstaller-1.4.0/AndroidManifest.xml:35:13-76
-108            android:directBootAware="false"
-108-->[androidx.profileinstaller:profileinstaller:1.4.0] /Users/eva/.gradle/caches/9.4.1/transforms/5adb68cc6c9071799bc45d6344f39e54/transformed/profileinstaller-1.4.0/AndroidManifest.xml:36:13-44
-109            android:enabled="true"
-109-->[androidx.profileinstaller:profileinstaller:1.4.0] /Users/eva/.gradle/caches/9.4.1/transforms/5adb68cc6c9071799bc45d6344f39e54/transformed/profileinstaller-1.4.0/AndroidManifest.xml:37:13-35
-110            android:exported="true"
-110-->[androidx.profileinstaller:profileinstaller:1.4.0] /Users/eva/.gradle/caches/9.4.1/transforms/5adb68cc6c9071799bc45d6344f39e54/transformed/profileinstaller-1.4.0/AndroidManifest.xml:38:13-36
-111            android:permission="android.permission.DUMP" >
-111-->[androidx.profileinstaller:profileinstaller:1.4.0] /Users/eva/.gradle/caches/9.4.1/transforms/5adb68cc6c9071799bc45d6344f39e54/transformed/profileinstaller-1.4.0/AndroidManifest.xml:39:13-57
-112            <intent-filter>
-112-->[androidx.profileinstaller:profileinstaller:1.4.0] /Users/eva/.gradle/caches/9.4.1/transforms/5adb68cc6c9071799bc45d6344f39e54/transformed/profileinstaller-1.4.0/AndroidManifest.xml:40:13-42:29
-113                <action android:name="androidx.profileinstaller.action.INSTALL_PROFILE" />
-113-->[androidx.profileinstaller:profileinstaller:1.4.0] /Users/eva/.gradle/caches/9.4.1/transforms/5adb68cc6c9071799bc45d6344f39e54/transformed/profileinstaller-1.4.0/AndroidManifest.xml:41:17-91
-113-->[androidx.profileinstaller:profileinstaller:1.4.0] /Users/eva/.gradle/caches/9.4.1/transforms/5adb68cc6c9071799bc45d6344f39e54/transformed/profileinstaller-1.4.0/AndroidManifest.xml:41:25-88
-114            </intent-filter>
-115            <intent-filter>
-115-->[androidx.profileinstaller:profileinstaller:1.4.0] /Users/eva/.gradle/caches/9.4.1/transforms/5adb68cc6c9071799bc45d6344f39e54/transformed/profileinstaller-1.4.0/AndroidManifest.xml:43:13-45:29
-116                <action android:name="androidx.profileinstaller.action.SKIP_FILE" />
-116-->[androidx.profileinstaller:profileinstaller:1.4.0] /Users/eva/.gradle/caches/9.4.1/transforms/5adb68cc6c9071799bc45d6344f39e54/transformed/profileinstaller-1.4.0/AndroidManifest.xml:44:17-85
-116-->[androidx.profileinstaller:profileinstaller:1.4.0] /Users/eva/.gradle/caches/9.4.1/transforms/5adb68cc6c9071799bc45d6344f39e54/transformed/profileinstaller-1.4.0/AndroidManifest.xml:44:25-82
-117            </intent-filter>
-118            <intent-filter>
-118-->[androidx.profileinstaller:profileinstaller:1.4.0] /Users/eva/.gradle/caches/9.4.1/transforms/5adb68cc6c9071799bc45d6344f39e54/transformed/profileinstaller-1.4.0/AndroidManifest.xml:46:13-48:29
-119                <action android:name="androidx.profileinstaller.action.SAVE_PROFILE" />
-119-->[androidx.profileinstaller:profileinstaller:1.4.0] /Users/eva/.gradle/caches/9.4.1/transforms/5adb68cc6c9071799bc45d6344f39e54/transformed/profileinstaller-1.4.0/AndroidManifest.xml:47:17-88
-119-->[androidx.profileinstaller:profileinstaller:1.4.0] /Users/eva/.gradle/caches/9.4.1/transforms/5adb68cc6c9071799bc45d6344f39e54/transformed/profileinstaller-1.4.0/AndroidManifest.xml:47:25-85
-120            </intent-filter>
-121            <intent-filter>
-121-->[androidx.profileinstaller:profileinstaller:1.4.0] /Users/eva/.gradle/caches/9.4.1/transforms/5adb68cc6c9071799bc45d6344f39e54/transformed/profileinstaller-1.4.0/AndroidManifest.xml:49:13-51:29
-122                <action android:name="androidx.profileinstaller.action.BENCHMARK_OPERATION" />
-122-->[androidx.profileinstaller:profileinstaller:1.4.0] /Users/eva/.gradle/caches/9.4.1/transforms/5adb68cc6c9071799bc45d6344f39e54/transformed/profileinstaller-1.4.0/AndroidManifest.xml:50:17-95
-122-->[androidx.profileinstaller:profileinstaller:1.4.0] /Users/eva/.gradle/caches/9.4.1/transforms/5adb68cc6c9071799bc45d6344f39e54/transformed/profileinstaller-1.4.0/AndroidManifest.xml:50:25-92
-123            </intent-filter>
-124        </receiver>
-125    </application>
-126
-127</manifest>
+36        android:testOnly="true"
+37        android:theme="@android:style/Theme.DeviceDefault" >
+37-->/Users/eva/Documents/Assignments/COMPX551/Assign3Mobile and Wearable Computing/Assign3MobileWearable/wear/src/main/AndroidManifest.xml:16:9-59
+38        <uses-library
+38-->/Users/eva/Documents/Assignments/COMPX551/Assign3Mobile and Wearable Computing/Assign3MobileWearable/wear/src/main/AndroidManifest.xml:17:9-19:39
+39            android:name="com.google.android.wearable"
+39-->/Users/eva/Documents/Assignments/COMPX551/Assign3Mobile and Wearable Computing/Assign3MobileWearable/wear/src/main/AndroidManifest.xml:18:13-55
+40            android:required="true" />
+40-->/Users/eva/Documents/Assignments/COMPX551/Assign3Mobile and Wearable Computing/Assign3MobileWearable/wear/src/main/AndroidManifest.xml:19:13-36
+41        <uses-library
+41-->/Users/eva/Documents/Assignments/COMPX551/Assign3Mobile and Wearable Computing/Assign3MobileWearable/wear/src/main/AndroidManifest.xml:20:9-22:40
+42            android:name="wear-sdk"
+42-->/Users/eva/Documents/Assignments/COMPX551/Assign3Mobile and Wearable Computing/Assign3MobileWearable/wear/src/main/AndroidManifest.xml:21:13-36
+43            android:required="false" />
+43-->/Users/eva/Documents/Assignments/COMPX551/Assign3Mobile and Wearable Computing/Assign3MobileWearable/wear/src/main/AndroidManifest.xml:22:13-37
+44
+45        <meta-data
+45-->/Users/eva/Documents/Assignments/COMPX551/Assign3Mobile and Wearable Computing/Assign3MobileWearable/wear/src/main/AndroidManifest.xml:24:9-26:37
+46            android:name="com.google.android.wearable.standalone"
+46-->/Users/eva/Documents/Assignments/COMPX551/Assign3Mobile and Wearable Computing/Assign3MobileWearable/wear/src/main/AndroidManifest.xml:25:13-66
+47            android:value="false" />
+47-->/Users/eva/Documents/Assignments/COMPX551/Assign3Mobile and Wearable Computing/Assign3MobileWearable/wear/src/main/AndroidManifest.xml:26:13-34
+48
+49        <activity
+49-->/Users/eva/Documents/Assignments/COMPX551/Assign3Mobile and Wearable Computing/Assign3MobileWearable/wear/src/main/AndroidManifest.xml:28:9-36:20
+50            android:name="com.example.assign3.wear.watch.MainActivity"
+50-->/Users/eva/Documents/Assignments/COMPX551/Assign3Mobile and Wearable Computing/Assign3MobileWearable/wear/src/main/AndroidManifest.xml:29:13-47
+51            android:exported="true"
+51-->/Users/eva/Documents/Assignments/COMPX551/Assign3Mobile and Wearable Computing/Assign3MobileWearable/wear/src/main/AndroidManifest.xml:30:13-36
+52            android:taskAffinity="" >
+52-->/Users/eva/Documents/Assignments/COMPX551/Assign3Mobile and Wearable Computing/Assign3MobileWearable/wear/src/main/AndroidManifest.xml:31:13-36
+53            <intent-filter>
+53-->/Users/eva/Documents/Assignments/COMPX551/Assign3Mobile and Wearable Computing/Assign3MobileWearable/wear/src/main/AndroidManifest.xml:32:13-35:29
+54                <action android:name="android.intent.action.MAIN" />
+54-->/Users/eva/Documents/Assignments/COMPX551/Assign3Mobile and Wearable Computing/Assign3MobileWearable/wear/src/main/AndroidManifest.xml:33:17-69
+54-->/Users/eva/Documents/Assignments/COMPX551/Assign3Mobile and Wearable Computing/Assign3MobileWearable/wear/src/main/AndroidManifest.xml:33:25-66
+55
+56                <category android:name="android.intent.category.LAUNCHER" />
+56-->/Users/eva/Documents/Assignments/COMPX551/Assign3Mobile and Wearable Computing/Assign3MobileWearable/wear/src/main/AndroidManifest.xml:34:17-77
+56-->/Users/eva/Documents/Assignments/COMPX551/Assign3Mobile and Wearable Computing/Assign3MobileWearable/wear/src/main/AndroidManifest.xml:34:27-74
+57            </intent-filter>
+58        </activity>
+59        <activity
+59-->[androidx.compose.ui:ui-tooling-android:1.10.4] /Users/eva/.gradle/caches/9.4.1/transforms/b0d433cb91b70f72a01069b27496b1a5/transformed/ui-tooling/AndroidManifest.xml:23:9-25:39
+60            android:name="androidx.compose.ui.tooling.PreviewActivity"
+60-->[androidx.compose.ui:ui-tooling-android:1.10.4] /Users/eva/.gradle/caches/9.4.1/transforms/b0d433cb91b70f72a01069b27496b1a5/transformed/ui-tooling/AndroidManifest.xml:24:13-71
+61            android:exported="true" />
+61-->[androidx.compose.ui:ui-tooling-android:1.10.4] /Users/eva/.gradle/caches/9.4.1/transforms/b0d433cb91b70f72a01069b27496b1a5/transformed/ui-tooling/AndroidManifest.xml:25:13-36
+62        <activity
+62-->[androidx.compose.ui:ui-test-manifest:1.10.4] /Users/eva/.gradle/caches/9.4.1/transforms/e5f3aa2a5eb264c5b036941aa6ced075/transformed/ui-test-manifest-1.10.4/AndroidManifest.xml:23:9-26:79
+63            android:name="androidx.activity.ComponentActivity"
+63-->[androidx.compose.ui:ui-test-manifest:1.10.4] /Users/eva/.gradle/caches/9.4.1/transforms/e5f3aa2a5eb264c5b036941aa6ced075/transformed/ui-test-manifest-1.10.4/AndroidManifest.xml:24:13-63
+64            android:exported="true"
+64-->[androidx.compose.ui:ui-test-manifest:1.10.4] /Users/eva/.gradle/caches/9.4.1/transforms/e5f3aa2a5eb264c5b036941aa6ced075/transformed/ui-test-manifest-1.10.4/AndroidManifest.xml:25:13-36
+65            android:theme="@android:style/Theme.Material.Light.NoActionBar" />
+65-->[androidx.compose.ui:ui-test-manifest:1.10.4] /Users/eva/.gradle/caches/9.4.1/transforms/e5f3aa2a5eb264c5b036941aa6ced075/transformed/ui-test-manifest-1.10.4/AndroidManifest.xml:26:13-76
+66
+67        <service
+67-->[androidx.health:health-services-client:1.1.0-rc02] /Users/eva/.gradle/caches/9.4.1/transforms/4a55815477509852c86baeaf8af6b220/transformed/health-services-client-1.1.0-rc02/AndroidManifest.xml:24:9-31:19
+68            android:name="androidx.health.services.client.VersionApiService"
+68-->[androidx.health:health-services-client:1.1.0-rc02] /Users/eva/.gradle/caches/9.4.1/transforms/4a55815477509852c86baeaf8af6b220/transformed/health-services-client-1.1.0-rc02/AndroidManifest.xml:25:13-77
+69            android:exported="true"
+69-->[androidx.health:health-services-client:1.1.0-rc02] /Users/eva/.gradle/caches/9.4.1/transforms/4a55815477509852c86baeaf8af6b220/transformed/health-services-client-1.1.0-rc02/AndroidManifest.xml:26:13-36
+70            android:permission="com.google.android.wearable.healthservices.permission.PASSIVE_DATA_BINDING" >
+70-->[androidx.health:health-services-client:1.1.0-rc02] /Users/eva/.gradle/caches/9.4.1/transforms/4a55815477509852c86baeaf8af6b220/transformed/health-services-client-1.1.0-rc02/AndroidManifest.xml:27:13-108
+71            <intent-filter>
+71-->[androidx.health:health-services-client:1.1.0-rc02] /Users/eva/.gradle/caches/9.4.1/transforms/4a55815477509852c86baeaf8af6b220/transformed/health-services-client-1.1.0-rc02/AndroidManifest.xml:28:13-30:29
+72                <action android:name="hs.versionclient.BIND" />
+72-->[androidx.health:health-services-client:1.1.0-rc02] /Users/eva/.gradle/caches/9.4.1/transforms/4a55815477509852c86baeaf8af6b220/transformed/health-services-client-1.1.0-rc02/AndroidManifest.xml:29:17-64
+72-->[androidx.health:health-services-client:1.1.0-rc02] /Users/eva/.gradle/caches/9.4.1/transforms/4a55815477509852c86baeaf8af6b220/transformed/health-services-client-1.1.0-rc02/AndroidManifest.xml:29:25-61
+73            </intent-filter>
+74        </service>
+75
+76        <activity
+76-->[com.google.android.gms:play-services-base:18.0.1] /Users/eva/.gradle/caches/9.4.1/transforms/464985688a25f035f63ea9f5a4eda53f/transformed/play-services-base-18.0.1/AndroidManifest.xml:20:9-22:45
+77            android:name="com.google.android.gms.common.api.GoogleApiActivity"
+77-->[com.google.android.gms:play-services-base:18.0.1] /Users/eva/.gradle/caches/9.4.1/transforms/464985688a25f035f63ea9f5a4eda53f/transformed/play-services-base-18.0.1/AndroidManifest.xml:20:19-85
+78            android:exported="false"
+78-->[com.google.android.gms:play-services-base:18.0.1] /Users/eva/.gradle/caches/9.4.1/transforms/464985688a25f035f63ea9f5a4eda53f/transformed/play-services-base-18.0.1/AndroidManifest.xml:22:19-43
+79            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+79-->[com.google.android.gms:play-services-base:18.0.1] /Users/eva/.gradle/caches/9.4.1/transforms/464985688a25f035f63ea9f5a4eda53f/transformed/play-services-base-18.0.1/AndroidManifest.xml:21:19-78
+80
+81        <meta-data
+81-->[com.google.android.gms:play-services-basement:18.0.0] /Users/eva/.gradle/caches/9.4.1/transforms/ee15a9815fde8d29bdd882a9f24d58f9/transformed/play-services-basement-18.0.0/AndroidManifest.xml:21:9-23:69
+82            android:name="com.google.android.gms.version"
+82-->[com.google.android.gms:play-services-basement:18.0.0] /Users/eva/.gradle/caches/9.4.1/transforms/ee15a9815fde8d29bdd882a9f24d58f9/transformed/play-services-basement-18.0.0/AndroidManifest.xml:22:13-58
+83            android:value="@integer/google_play_services_version" />
+83-->[com.google.android.gms:play-services-basement:18.0.0] /Users/eva/.gradle/caches/9.4.1/transforms/ee15a9815fde8d29bdd882a9f24d58f9/transformed/play-services-basement-18.0.0/AndroidManifest.xml:23:13-66
+84
+85        <provider
+85-->[androidx.emoji2:emoji2:1.4.0] /Users/eva/.gradle/caches/9.4.1/transforms/f9bb3d95a2132adffbe20390b2c0df18/transformed/emoji2-1.4.0/AndroidManifest.xml:24:9-32:20
+86            android:name="androidx.startup.InitializationProvider"
+86-->[androidx.emoji2:emoji2:1.4.0] /Users/eva/.gradle/caches/9.4.1/transforms/f9bb3d95a2132adffbe20390b2c0df18/transformed/emoji2-1.4.0/AndroidManifest.xml:25:13-67
+87            android:authorities="com.example.assign3.wear.androidx-startup"
+87-->[androidx.emoji2:emoji2:1.4.0] /Users/eva/.gradle/caches/9.4.1/transforms/f9bb3d95a2132adffbe20390b2c0df18/transformed/emoji2-1.4.0/AndroidManifest.xml:26:13-68
+88            android:exported="false" >
+88-->[androidx.emoji2:emoji2:1.4.0] /Users/eva/.gradle/caches/9.4.1/transforms/f9bb3d95a2132adffbe20390b2c0df18/transformed/emoji2-1.4.0/AndroidManifest.xml:27:13-37
+89            <meta-data
+89-->[androidx.emoji2:emoji2:1.4.0] /Users/eva/.gradle/caches/9.4.1/transforms/f9bb3d95a2132adffbe20390b2c0df18/transformed/emoji2-1.4.0/AndroidManifest.xml:29:13-31:52
+90                android:name="androidx.emoji2.text.EmojiCompatInitializer"
+90-->[androidx.emoji2:emoji2:1.4.0] /Users/eva/.gradle/caches/9.4.1/transforms/f9bb3d95a2132adffbe20390b2c0df18/transformed/emoji2-1.4.0/AndroidManifest.xml:30:17-75
+91                android:value="androidx.startup" />
+91-->[androidx.emoji2:emoji2:1.4.0] /Users/eva/.gradle/caches/9.4.1/transforms/f9bb3d95a2132adffbe20390b2c0df18/transformed/emoji2-1.4.0/AndroidManifest.xml:31:17-49
+92            <meta-data
+92-->[androidx.lifecycle:lifecycle-process:2.9.4] /Users/eva/.gradle/caches/9.4.1/transforms/6000b8c95fda8297e1df1e65eb501641/transformed/lifecycle-process-2.9.4/AndroidManifest.xml:29:13-31:52
+93                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
+93-->[androidx.lifecycle:lifecycle-process:2.9.4] /Users/eva/.gradle/caches/9.4.1/transforms/6000b8c95fda8297e1df1e65eb501641/transformed/lifecycle-process-2.9.4/AndroidManifest.xml:30:17-78
+94                android:value="androidx.startup" />
+94-->[androidx.lifecycle:lifecycle-process:2.9.4] /Users/eva/.gradle/caches/9.4.1/transforms/6000b8c95fda8297e1df1e65eb501641/transformed/lifecycle-process-2.9.4/AndroidManifest.xml:31:17-49
+95            <meta-data
+95-->[androidx.profileinstaller:profileinstaller:1.4.0] /Users/eva/.gradle/caches/9.4.1/transforms/5adb68cc6c9071799bc45d6344f39e54/transformed/profileinstaller-1.4.0/AndroidManifest.xml:29:13-31:52
+96                android:name="androidx.profileinstaller.ProfileInstallerInitializer"
+96-->[androidx.profileinstaller:profileinstaller:1.4.0] /Users/eva/.gradle/caches/9.4.1/transforms/5adb68cc6c9071799bc45d6344f39e54/transformed/profileinstaller-1.4.0/AndroidManifest.xml:30:17-85
+97                android:value="androidx.startup" />
+97-->[androidx.profileinstaller:profileinstaller:1.4.0] /Users/eva/.gradle/caches/9.4.1/transforms/5adb68cc6c9071799bc45d6344f39e54/transformed/profileinstaller-1.4.0/AndroidManifest.xml:31:17-49
+98        </provider>
+99
+100        <uses-library
+100-->[androidx.window:window:1.5.0] /Users/eva/.gradle/caches/9.4.1/transforms/b75ce9f8244c1e5c34343d8d69aefab8/transformed/window-1.5.0/AndroidManifest.xml:23:9-25:40
+101            android:name="androidx.window.extensions"
+101-->[androidx.window:window:1.5.0] /Users/eva/.gradle/caches/9.4.1/transforms/b75ce9f8244c1e5c34343d8d69aefab8/transformed/window-1.5.0/AndroidManifest.xml:24:13-54
+102            android:required="false" />
+102-->[androidx.window:window:1.5.0] /Users/eva/.gradle/caches/9.4.1/transforms/b75ce9f8244c1e5c34343d8d69aefab8/transformed/window-1.5.0/AndroidManifest.xml:25:13-37
+103        <uses-library
+103-->[androidx.window:window:1.5.0] /Users/eva/.gradle/caches/9.4.1/transforms/b75ce9f8244c1e5c34343d8d69aefab8/transformed/window-1.5.0/AndroidManifest.xml:26:9-28:40
+104            android:name="androidx.window.sidecar"
+104-->[androidx.window:window:1.5.0] /Users/eva/.gradle/caches/9.4.1/transforms/b75ce9f8244c1e5c34343d8d69aefab8/transformed/window-1.5.0/AndroidManifest.xml:27:13-51
+105            android:required="false" />
+105-->[androidx.window:window:1.5.0] /Users/eva/.gradle/caches/9.4.1/transforms/b75ce9f8244c1e5c34343d8d69aefab8/transformed/window-1.5.0/AndroidManifest.xml:28:13-37
+106
+107        <receiver
+107-->[androidx.profileinstaller:profileinstaller:1.4.0] /Users/eva/.gradle/caches/9.4.1/transforms/5adb68cc6c9071799bc45d6344f39e54/transformed/profileinstaller-1.4.0/AndroidManifest.xml:34:9-52:20
+108            android:name="androidx.profileinstaller.ProfileInstallReceiver"
+108-->[androidx.profileinstaller:profileinstaller:1.4.0] /Users/eva/.gradle/caches/9.4.1/transforms/5adb68cc6c9071799bc45d6344f39e54/transformed/profileinstaller-1.4.0/AndroidManifest.xml:35:13-76
+109            android:directBootAware="false"
+109-->[androidx.profileinstaller:profileinstaller:1.4.0] /Users/eva/.gradle/caches/9.4.1/transforms/5adb68cc6c9071799bc45d6344f39e54/transformed/profileinstaller-1.4.0/AndroidManifest.xml:36:13-44
+110            android:enabled="true"
+110-->[androidx.profileinstaller:profileinstaller:1.4.0] /Users/eva/.gradle/caches/9.4.1/transforms/5adb68cc6c9071799bc45d6344f39e54/transformed/profileinstaller-1.4.0/AndroidManifest.xml:37:13-35
+111            android:exported="true"
+111-->[androidx.profileinstaller:profileinstaller:1.4.0] /Users/eva/.gradle/caches/9.4.1/transforms/5adb68cc6c9071799bc45d6344f39e54/transformed/profileinstaller-1.4.0/AndroidManifest.xml:38:13-36
+112            android:permission="android.permission.DUMP" >
+112-->[androidx.profileinstaller:profileinstaller:1.4.0] /Users/eva/.gradle/caches/9.4.1/transforms/5adb68cc6c9071799bc45d6344f39e54/transformed/profileinstaller-1.4.0/AndroidManifest.xml:39:13-57
+113            <intent-filter>
+113-->[androidx.profileinstaller:profileinstaller:1.4.0] /Users/eva/.gradle/caches/9.4.1/transforms/5adb68cc6c9071799bc45d6344f39e54/transformed/profileinstaller-1.4.0/AndroidManifest.xml:40:13-42:29
+114                <action android:name="androidx.profileinstaller.action.INSTALL_PROFILE" />
+114-->[androidx.profileinstaller:profileinstaller:1.4.0] /Users/eva/.gradle/caches/9.4.1/transforms/5adb68cc6c9071799bc45d6344f39e54/transformed/profileinstaller-1.4.0/AndroidManifest.xml:41:17-91
+114-->[androidx.profileinstaller:profileinstaller:1.4.0] /Users/eva/.gradle/caches/9.4.1/transforms/5adb68cc6c9071799bc45d6344f39e54/transformed/profileinstaller-1.4.0/AndroidManifest.xml:41:25-88
+115            </intent-filter>
+116            <intent-filter>
+116-->[androidx.profileinstaller:profileinstaller:1.4.0] /Users/eva/.gradle/caches/9.4.1/transforms/5adb68cc6c9071799bc45d6344f39e54/transformed/profileinstaller-1.4.0/AndroidManifest.xml:43:13-45:29
+117                <action android:name="androidx.profileinstaller.action.SKIP_FILE" />
+117-->[androidx.profileinstaller:profileinstaller:1.4.0] /Users/eva/.gradle/caches/9.4.1/transforms/5adb68cc6c9071799bc45d6344f39e54/transformed/profileinstaller-1.4.0/AndroidManifest.xml:44:17-85
+117-->[androidx.profileinstaller:profileinstaller:1.4.0] /Users/eva/.gradle/caches/9.4.1/transforms/5adb68cc6c9071799bc45d6344f39e54/transformed/profileinstaller-1.4.0/AndroidManifest.xml:44:25-82
+118            </intent-filter>
+119            <intent-filter>
+119-->[androidx.profileinstaller:profileinstaller:1.4.0] /Users/eva/.gradle/caches/9.4.1/transforms/5adb68cc6c9071799bc45d6344f39e54/transformed/profileinstaller-1.4.0/AndroidManifest.xml:46:13-48:29
+120                <action android:name="androidx.profileinstaller.action.SAVE_PROFILE" />
+120-->[androidx.profileinstaller:profileinstaller:1.4.0] /Users/eva/.gradle/caches/9.4.1/transforms/5adb68cc6c9071799bc45d6344f39e54/transformed/profileinstaller-1.4.0/AndroidManifest.xml:47:17-88
+120-->[androidx.profileinstaller:profileinstaller:1.4.0] /Users/eva/.gradle/caches/9.4.1/transforms/5adb68cc6c9071799bc45d6344f39e54/transformed/profileinstaller-1.4.0/AndroidManifest.xml:47:25-85
+121            </intent-filter>
+122            <intent-filter>
+122-->[androidx.profileinstaller:profileinstaller:1.4.0] /Users/eva/.gradle/caches/9.4.1/transforms/5adb68cc6c9071799bc45d6344f39e54/transformed/profileinstaller-1.4.0/AndroidManifest.xml:49:13-51:29
+123                <action android:name="androidx.profileinstaller.action.BENCHMARK_OPERATION" />
+123-->[androidx.profileinstaller:profileinstaller:1.4.0] /Users/eva/.gradle/caches/9.4.1/transforms/5adb68cc6c9071799bc45d6344f39e54/transformed/profileinstaller-1.4.0/AndroidManifest.xml:50:17-95
+123-->[androidx.profileinstaller:profileinstaller:1.4.0] /Users/eva/.gradle/caches/9.4.1/transforms/5adb68cc6c9071799bc45d6344f39e54/transformed/profileinstaller-1.4.0/AndroidManifest.xml:50:25-92
+124            </intent-filter>
+125        </receiver>
+126    </application>
+127
+128</manifest>

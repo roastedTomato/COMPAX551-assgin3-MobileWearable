@@ -6,7 +6,7 @@ plugins {
 android {
     namespace = "com.example.assign3.wear"
     compileSdk {
-        version = release(36) {
+        version = release(37) {
             minorApiLevel = 1
         }
     }
