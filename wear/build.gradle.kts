@@ -12,7 +12,7 @@ android {
     }
 
     defaultConfig {
-        applicationId = "com.example.assign3.wear"
+        applicationId = "com.example.assign3"
         minSdk = 30
         targetSdk = 36
         versionCode = 1

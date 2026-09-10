@@ -9,6 +9,7 @@ import android.hardware.SensorManager
 import android.health.connect.HealthPermissions
 import android.os.Build
 import android.os.Bundle
+import android.os.SystemClock
 import androidx.activity.ComponentActivity
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.compose.setContent
@@ -24,8 +25,10 @@ import androidx.health.services.client.data.DataPointContainer
 import androidx.health.services.client.data.DataType
 import androidx.health.services.client.data.DeltaDataType
 import androidx.lifecycle.lifecycleScope
+import com.google.android.gms.wearable.Wearable
 import kotlinx.coroutines.guava.await
 import kotlinx.coroutines.launch
+import java.util.Locale
 
 
 class SensorActivity : ComponentActivity(), SensorEventListener {
@@ -43,6 +46,7 @@ class SensorActivity : ComponentActivity(), SensorEventListener {
     private var accelerometerX by mutableFloatStateOf(0f)
     private var accelerometerY by mutableFloatStateOf(0f)
     private var accelerometerZ by mutableFloatStateOf(0f)
+    private var lastAccelerometerSendTime = 0L
 
     private var gyroscopeX by mutableFloatStateOf(0f)
     private var gyroscopeY by mutableFloatStateOf(0f)
@@ -125,6 +129,11 @@ class SensorActivity : ComponentActivity(), SensorEventListener {
                 accelerometerX = sensorEvent.values[0]
                 accelerometerY = sensorEvent.values[1]
                 accelerometerZ = sensorEvent.values[2]
+                sendAccelerometerToPhone(
+                    x = accelerometerX,
+                    y = accelerometerY,
+                    z = accelerometerZ,
+                )
             }
 
             Sensor.TYPE_GYROSCOPE -> {
@@ -137,6 +146,33 @@ class SensorActivity : ComponentActivity(), SensorEventListener {
     }
 
     override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {
+    }
+
+    private fun sendAccelerometerToPhone(x: Float, y: Float, z: Float) {
+        val now = SystemClock.elapsedRealtime()
+        if (now - lastAccelerometerSendTime < ACCELEROMETER_SEND_INTERVAL_MS) {
+            return
+        }
+        lastAccelerometerSendTime = now
+
+        val payload = String.format(
+            Locale.US,
+            "%d,%.4f,%.4f,%.4f",
+            System.currentTimeMillis(),
+            x,
+            y,
+            z,
+        ).toByteArray(Charsets.UTF_8)
+
+        Wearable.getNodeClient(this).connectedNodes.addOnSuccessListener { nodes ->
+            nodes.forEach { node ->
+                Wearable.getMessageClient(this).sendMessage(
+                    node.id,
+                    ACCELEROMETER_MESSAGE_PATH,
+                    payload,
+                )
+            }
+        }
     }
 
 
@@ -210,3 +246,6 @@ private fun heartRatePermission(): String {
         Manifest.permission.BODY_SENSORS
     }
 }
+
+private const val ACCELEROMETER_MESSAGE_PATH = "/motion/accelerometer"
+private const val ACCELEROMETER_SEND_INTERVAL_MS = 500L
