@@ -8,25 +8,38 @@ import androidx.compose.runtime.mutableStateOf
 
 class MainActivity : ComponentActivity() {
     private val uiState = mutableStateOf(PhoneUiState())
+    private val sensorProcessor = SensorProcessor()
+    private val accelerometerReadings = mutableListOf<MotionReading>()
+    private val gyroscopeReadings = mutableListOf<MotionReading>()
+    private val heartRateReadings = mutableListOf<HeartRateReading>()
     private lateinit var wearDataReceiver: WearDataReceiver
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         wearDataReceiver = WearDataReceiver(
             context = this,
-            onAccelerometerReceived = { accelerometerText ->
+            onAccelerometerReceived = { reading ->
                 runOnUiThread {
-                    uiState.value = uiState.value.copy(accelerometerText = accelerometerText)
+                    accelerometerReadings.addReading(reading)
+                    uiState.value = uiState.value.copy(
+                        accelerometerText = sensorProcessor.processAccelerometer(accelerometerReadings)
+                    )
                 }
             },
-            onGyroscopeReceived = { gyroscopeText ->
+            onGyroscopeReceived = { reading ->
                 runOnUiThread {
-                    uiState.value = uiState.value.copy(gyroscopeText = gyroscopeText)
+                    gyroscopeReadings.addReading(reading)
+                    uiState.value = uiState.value.copy(
+                        gyroscopeText = sensorProcessor.processGyroscope(gyroscopeReadings)
+                    )
                 }
             },
-            onHeartRateReceived = { heartRateText ->
+            onHeartRateReceived = { reading ->
                 runOnUiThread {
-                    uiState.value = uiState.value.copy(heartRateText = heartRateText)
+                    heartRateReadings.addReading(reading)
+                    uiState.value = uiState.value.copy(
+                        heartRateText = sensorProcessor.processHeartRate(heartRateReadings)
+                    )
                 }
             }
         )
@@ -48,3 +61,12 @@ class MainActivity : ComponentActivity() {
         super.onPause()
     }
 }
+
+private fun <T> MutableList<T>.addReading(reading: T) {
+    add(reading)
+    if (size > MAX_READING_HISTORY) {
+        removeAt(0)
+    }
+}
+
+private const val MAX_READING_HISTORY = 30

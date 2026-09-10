@@ -103,9 +103,9 @@ private fun PhoneScreenPreview() {
     MaterialTheme {
         PhoneScreen(
             uiState = PhoneUiState(
-                accelerometerText = "Accelerometer  X: 0.12  Y: 9.81  Z: -0.34",
-                gyroscopeText = "Gyroscope  X: 0.01  Y: -0.02  Z: 0.03",
-                heartRateText = "Heart Rate  BPM: 72",
+                accelerometerText = "X: 0.12  Y: 9.81  Z: -0.34\nMagnitude: 9.82\nAvg: 9.82  Intensity: Low",
+                gyroscopeText = "X: 0.01  Y: -0.02  Z: 0.03\nRotation: 0.04\nAvg: 0.04  Movement: Stable",
+                heartRateText = "BPM: 72\nSmoothed: 72\nZone: Resting",
             )
         )
     }

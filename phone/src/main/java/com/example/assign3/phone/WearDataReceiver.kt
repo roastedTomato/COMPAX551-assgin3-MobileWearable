@@ -8,13 +8,12 @@ import com.google.android.gms.wearable.DataMapItem
 import com.google.android.gms.wearable.MessageClient
 import com.google.android.gms.wearable.MessageEvent
 import com.google.android.gms.wearable.Wearable
-import java.util.Locale
 
 class WearDataReceiver(
     context: Context,
-    private val onAccelerometerReceived: (String) -> Unit,
-    private val onGyroscopeReceived: (String) -> Unit,
-    private val onHeartRateReceived: (String) -> Unit,
+    private val onAccelerometerReceived: (MotionReading) -> Unit,
+    private val onGyroscopeReceived: (MotionReading) -> Unit,
+    private val onHeartRateReceived: (HeartRateReading) -> Unit,
 ) : MessageClient.OnMessageReceivedListener, DataClient.OnDataChangedListener {
     private val messageClient = Wearable.getMessageClient(context)
     private val dataClient = Wearable.getDataClient(context)
@@ -31,12 +30,12 @@ class WearDataReceiver(
 
     override fun onMessageReceived(messageEvent: MessageEvent) {
         when (messageEvent.path) {
-            ACCELEROMETER_MESSAGE_PATH -> onAccelerometerReceived(
-                formatMotionMessage("Accelerometer", messageEvent.data)
-            )
-            GYROSCOPE_MESSAGE_PATH -> onGyroscopeReceived(
-                formatMotionMessage("Gyroscope", messageEvent.data)
-            )
+            ACCELEROMETER_MESSAGE_PATH -> parseMotionMessage(messageEvent.data)?.let {
+                onAccelerometerReceived(it)
+            }
+            GYROSCOPE_MESSAGE_PATH -> parseMotionMessage(messageEvent.data)?.let {
+                onGyroscopeReceived(it)
+            }
         }
     }
 
@@ -46,33 +45,26 @@ class WearDataReceiver(
                 event.dataItem.uri.path == HEART_RATE_DATA_PATH
             ) {
                 val dataMap = DataMapItem.fromDataItem(event.dataItem).dataMap
+                val timestamp = dataMap.getLong("timestamp")
                 val bpm = dataMap.getFloat("bpm")
-                onHeartRateReceived(
-                    String.format(Locale.US, "Heart Rate  BPM: %.0f", bpm)
-                )
+                onHeartRateReceived(HeartRateReading(timestamp = timestamp, bpm = bpm))
             }
         }
     }
 
-    private fun formatMotionMessage(label: String, data: ByteArray): String {
+    private fun parseMotionMessage(data: ByteArray): MotionReading? {
         val message = data.toString(Charsets.UTF_8)
         val parts = message.split(",")
         if (parts.size != 4) {
-            return "$label data unavailable"
+            return null
         }
 
-        val x = parts[1].toFloatOrNull() ?: return "$label data unavailable"
-        val y = parts[2].toFloatOrNull() ?: return "$label data unavailable"
-        val z = parts[3].toFloatOrNull() ?: return "$label data unavailable"
+        val timestamp = parts[0].toLongOrNull() ?: return null
+        val x = parts[1].toFloatOrNull() ?: return null
+        val y = parts[2].toFloatOrNull() ?: return null
+        val z = parts[3].toFloatOrNull() ?: return null
 
-        return String.format(
-            Locale.US,
-            "%s  X: %.2f  Y: %.2f  Z: %.2f",
-            label,
-            x,
-            y,
-            z,
-        )
+        return MotionReading(timestamp = timestamp, x = x, y = y, z = z)
     }
 }
 
