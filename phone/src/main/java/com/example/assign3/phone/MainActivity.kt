@@ -47,13 +47,13 @@ private fun PhoneApp() {
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(
-                text = "Assignment 3",
+                text = "A3 - Phone App",
                 style = MaterialTheme.typography.headlineMedium,
                 fontWeight = FontWeight.Bold,
                 textAlign = TextAlign.Center
             )
             Text(
-                text = "Phone App",
+                text = "Qianyu CAO",
                 style = MaterialTheme.typography.bodyLarge,
                 textAlign = TextAlign.Center,
                 modifier = Modifier.padding(top = 6.dp)
@@ -62,10 +62,7 @@ private fun PhoneApp() {
     }
 }
 
-@Preview(
-    name = "Phone home",
-    showBackground = true
-)
+@Preview
 @Composable
 private fun PhoneAppPreview() {
     MaterialTheme {

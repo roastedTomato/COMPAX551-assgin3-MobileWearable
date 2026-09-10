@@ -2,6 +2,10 @@
 .gradle/
 build/
 */build/
+/local.properties
+/captures/
+.externalNativeBuild/
+.cxx/
 
 # APK / generated outputs
 *.apk
@@ -13,6 +17,12 @@ build/
 # IDE files
 .idea/
 *.iml
+/.idea/caches/
+/.idea/libraries/
+/.idea/modules.xml
+/.idea/workspace.xml
+/.idea/navEditor.xml
+/.idea/assetWizardSettings.xml
 
 # macOS
 .DS_Store

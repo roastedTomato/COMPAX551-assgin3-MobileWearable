@@ -18,6 +18,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.wear.compose.material3.MaterialTheme
 import androidx.wear.compose.material3.Text
+import androidx.wear.tooling.preview.devices.WearDevices
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,13 +42,13 @@ private fun WearApp() {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
-            text = "Assignment 3",
+            text = "A3 - Wear OS App",
             style = MaterialTheme.typography.titleLarge,
             fontWeight = FontWeight.Bold,
             textAlign = TextAlign.Center
         )
         Text(
-            text = "Wear OS App",
+            text = "Qianyu CAO",
             style = MaterialTheme.typography.bodyMedium,
             textAlign = TextAlign.Center,
             modifier = Modifier.padding(top = 8.dp)
@@ -55,11 +56,7 @@ private fun WearApp() {
     }
 }
 
-@Preview(
-    name = "Wear home",
-    device = "id:wearos_large_round",
-    showSystemUi = true
-)
+@Preview(device = WearDevices.SMALL_ROUND, showSystemUi = true)
 @Composable
 private fun WearAppPreview() {
     MaterialTheme {
