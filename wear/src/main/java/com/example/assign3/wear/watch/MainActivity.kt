@@ -23,7 +23,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.wear.compose.material3.Button
 import androidx.wear.compose.material3.MaterialTheme
-import androidx.wear.compose.material3.ScreenScaffold
 import androidx.wear.compose.material3.Text
 import androidx.wear.tooling.preview.devices.WearDevices
 
@@ -49,13 +48,10 @@ fun WearApp(
     onOpenSensors: () -> Unit,
 ) {
     MaterialTheme {
-        ScreenScaffold { contentPadding ->
-            WelcomeScreen(
-                name = name,
-                onOpenSensors = onOpenSensors,
-                modifier = Modifier.padding(contentPadding),
-            )
-        }
+        WelcomeScreen(
+            name = name,
+            onOpenSensors = onOpenSensors,
+        )
     }
 }
 

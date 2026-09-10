@@ -4,6 +4,7 @@ data class PhoneUiState(
     val accelerometer: AccelerometerResult? = null,
     val gyroscope: GyroscopeResult? = null,
     val heartRate: HeartRateResult? = null,
+    val isReceivingWatchData: Boolean = false,
 )
 
 data class AccelerometerResult(

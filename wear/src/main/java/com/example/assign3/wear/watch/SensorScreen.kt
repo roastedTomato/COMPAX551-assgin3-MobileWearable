@@ -20,7 +20,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.wear.compose.material3.MaterialTheme
-import androidx.wear.compose.material3.ScreenScaffold
 import androidx.wear.compose.material3.Text
 import androidx.wear.tooling.preview.devices.WearDevices
 import java.util.Locale
@@ -39,54 +38,52 @@ fun SensorApp(
     isHeartRateAvailable: Boolean = false,
 ) {
     MaterialTheme {
-        ScreenScaffold { contentPadding ->
-            LazyColumn(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .background(Color.White)
-                    .padding(contentPadding)
-                    .padding(horizontal = 18.dp),
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.spacedBy(10.dp, Alignment.CenterVertically),
-            ) {
-                item {
-                    SensorSection(
-                        title = "Accelerometer",
-                        isAvailable = isAccelerometerAvailable,
+        LazyColumn(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(Color.White)
+                .padding(horizontal = 18.dp),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.spacedBy(10.dp, Alignment.CenterVertically),
+        ) {
+            item {
+                SensorSection(
+                    title = "Accelerometer",
+                    isAvailable = isAccelerometerAvailable,
+                ) {
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceEvenly,
                     ) {
-                        Row(
-                            modifier = Modifier.fillMaxWidth(),
-                            horizontalArrangement = Arrangement.SpaceEvenly,
-                        ){
-                            SensorValue(label = "X", value = accelerometerX)
-                            SensorValue(label = "Y", value = accelerometerY)
-                            SensorValue(label = "Z", value = accelerometerZ)
-                        }
+                        SensorValue(label = "X", value = accelerometerX)
+                        SensorValue(label = "Y", value = accelerometerY)
+                        SensorValue(label = "Z", value = accelerometerZ)
                     }
                 }
+            }
 
-                item {
-                    SensorSection(
-                        title = "Gyroscope",
-                        isAvailable = isGyroscopeAvailable,
+            item {
+                SensorSection(
+                    title = "Gyroscope",
+                    isAvailable = isGyroscopeAvailable,
+                ) {
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceEvenly,
                     ) {
-                        Row(
-                            modifier = Modifier.fillMaxWidth(),
-                            horizontalArrangement = Arrangement.SpaceEvenly,
-                        ) {  SensorValue(label = "X", value = gyroscopeX)
-                            SensorValue(label = "Y", value = gyroscopeY)
-                            SensorValue(label = "Z", value = gyroscopeZ)
-                        }
+                        SensorValue(label = "X", value = gyroscopeX)
+                        SensorValue(label = "Y", value = gyroscopeY)
+                        SensorValue(label = "Z", value = gyroscopeZ)
                     }
                 }
+            }
 
-                item {
-                    SensorSection(
-                        title = "Heart Rate",
-                        isAvailable = isHeartRateAvailable,
-                    ) {
-                        SensorValue(label = "BPM", value = heartRateBpm)
-                    }
+            item {
+                SensorSection(
+                    title = "Heart Rate",
+                    isAvailable = isHeartRateAvailable,
+                ) {
+                    SensorValue(label = "BPM", value = heartRateBpm)
                 }
             }
         }

@@ -23,7 +23,7 @@ class SensorProcessor {
             intensity = intensity,
             displayText = String.format(
                 Locale.US,
-                "X: %.2f  Y: %.2f  Z: %.2f\nMagnitude: %.2f\nMovement: %.2f  Intensity: %s",
+                "Raw X: %.2f  Y: %.2f  Z: %.2f\nRaw magnitude: %.2f\nMovement score: %.2f  Intensity: %s",
                 latest.x,
                 latest.y,
                 latest.z,
@@ -53,7 +53,7 @@ class SensorProcessor {
             movement = movement,
             displayText = String.format(
                 Locale.US,
-                "X: %.2f  Y: %.2f  Z: %.2f\nRotation: %.2f\nAvg: %.2f  Movement: %s",
+                "Raw X: %.2f  Y: %.2f  Z: %.2f\nRotation magnitude: %.2f\nRolling avg: %.2f  Movement: %s",
                 latest.x,
                 latest.y,
                 latest.z,
@@ -87,7 +87,7 @@ class SensorProcessor {
             zoneDistribution = distribution,
             displayText = String.format(
                 Locale.US,
-                "BPM: %.0f\nSmoothed: %.0f\nZone: %s",
+                "Latest BPM: %.0f\nSmoothed BPM: %.0f\nZone: %s",
                 latest.bpm,
                 smoothedBpm,
                 zone,

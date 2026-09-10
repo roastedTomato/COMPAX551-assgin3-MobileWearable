@@ -12,6 +12,9 @@ class MainActivity : ComponentActivity() {
     private val accelerometerReadings = mutableListOf<MotionReading>()
     private val gyroscopeReadings = mutableListOf<MotionReading>()
     private val heartRateReadings = mutableListOf<HeartRateReading>()
+    private var latestAccelerometerReading: MotionReading? = null
+    private var latestGyroscopeReading: MotionReading? = null
+    private var latestHeartRateReading: HeartRateReading? = null
     private lateinit var wearDataReceiver: WearDataReceiver
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -20,25 +23,31 @@ class MainActivity : ComponentActivity() {
             context = this,
             onAccelerometerReceived = { reading ->
                 runOnUiThread {
+                    latestAccelerometerReading = reading
                     accelerometerReadings.addReading(reading)
                     uiState.value = uiState.value.copy(
-                        accelerometer = sensorProcessor.processAccelerometer(accelerometerReadings)
+                        accelerometer = sensorProcessor.processAccelerometer(accelerometerReadings),
+                        isReceivingWatchData = true,
                     )
                 }
             },
             onGyroscopeReceived = { reading ->
                 runOnUiThread {
+                    latestGyroscopeReading = reading
                     gyroscopeReadings.addReading(reading)
                     uiState.value = uiState.value.copy(
-                        gyroscope = sensorProcessor.processGyroscope(gyroscopeReadings)
+                        gyroscope = sensorProcessor.processGyroscope(gyroscopeReadings),
+                        isReceivingWatchData = true,
                     )
                 }
             },
             onHeartRateReceived = { reading ->
                 runOnUiThread {
+                    latestHeartRateReading = reading
                     heartRateReadings.addReading(reading)
                     uiState.value = uiState.value.copy(
-                        heartRate = sensorProcessor.processHeartRate(heartRateReadings)
+                        heartRate = sensorProcessor.processHeartRate(heartRateReadings),
+                        isReceivingWatchData = true,
                     )
                 }
             }
@@ -46,7 +55,10 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             MaterialTheme {
-                PhoneScreen(uiState = uiState.value)
+                PhoneScreen(
+                    uiState = uiState.value,
+                    onResetSession = ::resetSession,
+                )
             }
         }
     }
@@ -59,6 +71,25 @@ class MainActivity : ComponentActivity() {
     override fun onPause() {
         wearDataReceiver.stop()
         super.onPause()
+    }
+
+    private fun resetSession() {
+        accelerometerReadings.clear()
+        gyroscopeReadings.clear()
+        heartRateReadings.clear()
+
+        latestAccelerometerReading?.let { accelerometerReadings.add(it) }
+        latestGyroscopeReading?.let { gyroscopeReadings.add(it) }
+        latestHeartRateReading?.let { heartRateReadings.add(it) }
+
+        uiState.value = PhoneUiState(
+            accelerometer = sensorProcessor.processAccelerometer(accelerometerReadings),
+            gyroscope = sensorProcessor.processGyroscope(gyroscopeReadings),
+            heartRate = sensorProcessor.processHeartRate(heartRateReadings),
+            isReceivingWatchData = latestAccelerometerReading != null ||
+                latestGyroscopeReading != null ||
+                latestHeartRateReading != null,
+        )
     }
 }
 

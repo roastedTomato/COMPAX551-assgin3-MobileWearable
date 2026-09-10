@@ -16,6 +16,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.SegmentedButton
 import androidx.compose.material3.SegmentedButtonDefaults
@@ -43,7 +45,10 @@ import java.util.Locale
 import kotlin.math.roundToInt
 
 @Composable
-fun PhoneScreen(uiState: PhoneUiState) {
+fun PhoneScreen(
+    uiState: PhoneUiState,
+    onResetSession: () -> Unit,
+) {
     var selectedSensor by remember { mutableStateOf(SensorPage.Accelerometer) }
 
     Column(
@@ -72,6 +77,10 @@ fun PhoneScreen(uiState: PhoneUiState) {
             selectedSensor = selectedSensor,
             onSensorSelected = { selectedSensor = it },
         )
+        SessionStatusRow(
+            isReceiving = uiState.isReceivingWatchData,
+            onResetSession = onResetSession,
+        )
 
         Box(
             modifier = Modifier
@@ -96,6 +105,36 @@ fun PhoneScreen(uiState: PhoneUiState) {
                     result = uiState.heartRate,
                 )
             }
+        }
+    }
+}
+
+@Composable
+private fun SessionStatusRow(
+    isReceiving: Boolean,
+    onResetSession: () -> Unit,
+) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = 10.dp),
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.SpaceBetween,
+    ) {
+        Text(
+            text = if (isReceiving) "Receiving watch data" else "Waiting for watch",
+            color = if (isReceiving) CalmGreen else Color(0xFF666666),
+            fontSize = 14.sp,
+            fontWeight = FontWeight.Bold,
+        )
+        Button(
+            onClick = onResetSession,
+            colors = ButtonDefaults.buttonColors(
+                containerColor = Color(0xFFF5F5F5),
+                contentColor = Color.Black,
+            ),
+        ) {
+            Text(text = "Reset", fontSize = 14.sp)
         }
     }
 }
@@ -153,7 +192,7 @@ private fun AccelerometerSection(
             values = result?.movementTrend.orEmpty(),
             max = ACCELEROMETER_MOVEMENT_MAX,
             color = color,
-            yLabel = "Movement",
+            yLabel = "Movement score (0-3)",
         )
     }
 }
@@ -178,7 +217,7 @@ private fun GyroscopeSection(
             values = result?.rotationTrend.orEmpty(),
             max = GYROSCOPE_MAX,
             color = color,
-            yLabel = "Rotation",
+            yLabel = "Rotation magnitude (0-5)",
         )
     }
 }
@@ -481,7 +520,7 @@ private fun PhoneScreenPreview() {
                     movementScore = 1.1f,
                     movementTrend = listOf(0.1f, 0.3f, 0.7f, 1.1f, 1.4f, 0.9f, 1.2f),
                     intensity = MotionIntensity.Medium,
-                    displayText = "X: 0.12  Y: 9.81  Z: -0.34\nMagnitude: 9.82\nMovement: 1.10  Intensity: Medium",
+                    displayText = "Raw X: 0.12  Y: 9.81  Z: -0.34\nRaw magnitude: 9.82\nMovement score: 1.10  Intensity: Medium",
                 ),
                 gyroscope = GyroscopeResult(
                     x = 0.01f,
@@ -491,7 +530,7 @@ private fun PhoneScreenPreview() {
                     averageRotationMagnitude = 1.2f,
                     rotationTrend = listOf(0.2f, 0.4f, 0.7f, 1.1f, 1.2f, 0.9f, 1.5f),
                     movement = RotationMovement.Active,
-                    displayText = "X: 0.01  Y: -0.02  Z: 0.03\nRotation: 0.04\nAvg: 1.20  Movement: Active",
+                    displayText = "Raw X: 0.01  Y: -0.02  Z: 0.03\nRotation magnitude: 0.04\nRolling avg: 1.20  Movement: Active",
                 ),
                 heartRate = HeartRateResult(
                     bpm = 96f,
@@ -502,9 +541,11 @@ private fun PhoneScreenPreview() {
                         moderate = 14,
                         elevated = 3,
                     ),
-                    displayText = "BPM: 96\nSmoothed: 94\nZone: Moderate",
+                    displayText = "Latest BPM: 96\nSmoothed BPM: 94\nZone: Moderate",
                 ),
-            )
+                isReceivingWatchData = true,
+            ),
+            onResetSession = {},
         )
     }
 }
