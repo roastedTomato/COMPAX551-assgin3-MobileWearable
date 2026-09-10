@@ -1,12 +1,17 @@
 package com.example.assign3.wear.watch
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -16,7 +21,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.wear.compose.material3.Button
 import androidx.wear.compose.material3.MaterialTheme
+import androidx.wear.compose.material3.ScreenScaffold
 import androidx.wear.compose.material3.Text
 import androidx.wear.tooling.preview.devices.WearDevices
 
@@ -25,41 +32,76 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             MaterialTheme {
-                WearApp()
+                WearApp(
+                    name = "Qianyu CAO",
+                    onOpenSensors = {
+                        startActivity(Intent(this,SensorActivity::class.java))
+                    }
+                )
             }
         }
     }
 }
 
 @Composable
-private fun WearApp() {
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(Color.Black)
-            .padding(horizontal = 18.dp, vertical = 16.dp),
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        Text(
-            text = "A3 - Wear OS App",
-            style = MaterialTheme.typography.titleLarge,
-            fontWeight = FontWeight.Bold,
-            textAlign = TextAlign.Center
-        )
-        Text(
-            text = "Qianyu CAO",
-            style = MaterialTheme.typography.bodyMedium,
-            textAlign = TextAlign.Center,
-            modifier = Modifier.padding(top = 8.dp)
-        )
+fun WearApp(
+    name: String,
+    onOpenSensors: () -> Unit,
+) {
+    MaterialTheme {
+        ScreenScaffold { contentPadding ->
+            WelcomeScreen(
+                name = name,
+                onOpenSensors = onOpenSensors,
+                modifier = Modifier.padding(contentPadding),
+            )
+        }
     }
 }
 
+@Composable
+private fun WelcomeScreen(
+    name: String,
+    onOpenSensors: () -> Unit,
+    modifier: Modifier = Modifier,
+) {
+    Box(
+        modifier = modifier
+            .fillMaxSize()
+            .padding(horizontal = 18.dp),
+        contentAlignment = Alignment.Center,
+    ) {
+        Column(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center,
+        ) {
+            Text(
+                text = name,
+                textAlign = TextAlign.Center,
+                color = Color.White
+            )
+            Spacer(modifier = Modifier.height(12.dp))
+
+            Button(
+                onClick = onOpenSensors,
+                modifier = Modifier.fillMaxWidth(),
+            ) {
+                Text(
+                    text = "A3-Open Sensors",
+                    textAlign = TextAlign.Center,
+                )
+            }
+        }
+    }
+}
+
+
 @Preview(device = WearDevices.SMALL_ROUND, showSystemUi = true)
 @Composable
-private fun WearAppPreview() {
-    MaterialTheme {
-        WearApp()
-    }
+fun DefaultPreview() {
+    WearApp(
+        name = "Qianyu CAO",
+        onOpenSensors = {},
+    )
 }
