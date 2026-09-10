@@ -12,11 +12,24 @@ class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        wearDataReceiver = WearDataReceiver(this) { accelerometerText ->
-            runOnUiThread {
-                uiState.value = uiState.value.copy(accelerometerText = accelerometerText)
+        wearDataReceiver = WearDataReceiver(
+            context = this,
+            onAccelerometerReceived = { accelerometerText ->
+                runOnUiThread {
+                    uiState.value = uiState.value.copy(accelerometerText = accelerometerText)
+                }
+            },
+            onGyroscopeReceived = { gyroscopeText ->
+                runOnUiThread {
+                    uiState.value = uiState.value.copy(gyroscopeText = gyroscopeText)
+                }
+            },
+            onHeartRateReceived = { heartRateText ->
+                runOnUiThread {
+                    uiState.value = uiState.value.copy(heartRateText = heartRateText)
+                }
             }
-        }
+        )
 
         setContent {
             MaterialTheme {

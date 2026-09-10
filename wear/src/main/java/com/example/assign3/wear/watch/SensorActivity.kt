@@ -25,6 +25,7 @@ import androidx.health.services.client.data.DataPointContainer
 import androidx.health.services.client.data.DataType
 import androidx.health.services.client.data.DeltaDataType
 import androidx.lifecycle.lifecycleScope
+import com.google.android.gms.wearable.PutDataMapRequest
 import com.google.android.gms.wearable.Wearable
 import kotlinx.coroutines.guava.await
 import kotlinx.coroutines.launch
@@ -51,6 +52,7 @@ class SensorActivity : ComponentActivity(), SensorEventListener {
     private var gyroscopeX by mutableFloatStateOf(0f)
     private var gyroscopeY by mutableFloatStateOf(0f)
     private var gyroscopeZ by mutableFloatStateOf(0f)
+    private var lastGyroscopeSendTime = 0L
 
     // declares the heart rate and its values
     private var heartRateBpm by mutableFloatStateOf(0f)
@@ -140,6 +142,11 @@ class SensorActivity : ComponentActivity(), SensorEventListener {
                 gyroscopeX = sensorEvent.values[0]
                 gyroscopeY = sensorEvent.values[1]
                 gyroscopeZ = sensorEvent.values[2]
+                sendGyroscopeToPhone(
+                    x = gyroscopeX,
+                    y = gyroscopeY,
+                    z = gyroscopeZ,
+                )
             }
 
         }
@@ -154,7 +161,29 @@ class SensorActivity : ComponentActivity(), SensorEventListener {
             return
         }
         lastAccelerometerSendTime = now
+        sendMotionToPhone(
+            path = ACCELEROMETER_MESSAGE_PATH,
+            x = x,
+            y = y,
+            z = z,
+        )
+    }
 
+    private fun sendGyroscopeToPhone(x: Float, y: Float, z: Float) {
+        val now = SystemClock.elapsedRealtime()
+        if (now - lastGyroscopeSendTime < GYROSCOPE_SEND_INTERVAL_MS) {
+            return
+        }
+        lastGyroscopeSendTime = now
+        sendMotionToPhone(
+            path = GYROSCOPE_MESSAGE_PATH,
+            x = x,
+            y = y,
+            z = z,
+        )
+    }
+
+    private fun sendMotionToPhone(path: String, x: Float, y: Float, z: Float) {
         val payload = String.format(
             Locale.US,
             "%d,%.4f,%.4f,%.4f",
@@ -168,11 +197,20 @@ class SensorActivity : ComponentActivity(), SensorEventListener {
             nodes.forEach { node ->
                 Wearable.getMessageClient(this).sendMessage(
                     node.id,
-                    ACCELEROMETER_MESSAGE_PATH,
+                    path,
                     payload,
                 )
             }
         }
+    }
+
+    private fun sendHeartRateToPhone(bpm: Float) {
+        val dataRequest = PutDataMapRequest.create(HEART_RATE_DATA_PATH).apply {
+            dataMap.putLong("timestamp", System.currentTimeMillis())
+            dataMap.putFloat("bpm", bpm)
+        }.asPutDataRequest().setUrgent()
+
+        Wearable.getDataClient(this).putDataItem(dataRequest)
     }
 
 
@@ -223,6 +261,7 @@ class SensorActivity : ComponentActivity(), SensorEventListener {
             val heartRateData = data.getData(DataType.HEART_RATE_BPM)
             val latestHeartRate = heartRateData.lastOrNull()?.value
             if (latestHeartRate != null) {
+                sendHeartRateToPhone(latestHeartRate.toFloat())
                 runOnUiThread {
                     heartRateBpm = latestHeartRate.toFloat()
                     isHeartRateAvailable = true
@@ -248,4 +287,7 @@ private fun heartRatePermission(): String {
 }
 
 private const val ACCELEROMETER_MESSAGE_PATH = "/motion/accelerometer"
+private const val GYROSCOPE_MESSAGE_PATH = "/motion/gyroscope"
+private const val HEART_RATE_DATA_PATH = "/health/heart_rate"
 private const val ACCELEROMETER_SEND_INTERVAL_MS = 500L
+private const val GYROSCOPE_SEND_INTERVAL_MS = 500L
