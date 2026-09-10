@@ -7,6 +7,7 @@ wearToolingPreview = "1.0.0"
 activityCompose = "1.13.0"
 coreKtx = "1.10.1"
 coreSplashscreen = "1.2.0"
+fragment = "1.8.9"
 lifecycleRuntimeKtx = "2.9.4"
 playServicesWearable = "18.0.0"
 healthServicesClient = "1.1.0-rc02"
@@ -24,6 +25,7 @@ compose-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-mani
 core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 core-splashscreen = { group = "androidx.core", name = "core-splashscreen", version.ref = "coreSplashscreen" }
 coroutines-guava = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-guava", version.ref = "coroutinesGuava" }
+fragment = { group = "androidx.fragment", name = "fragment", version.ref = "fragment" }
 health-services-client = { group = "androidx.health", name = "health-services-client", version.ref = "healthServicesClient" }
 lifecycle-runtime-ktx = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "lifecycleRuntimeKtx" }
 play-services-wearable = { group = "com.google.android.gms", name = "play-services-wearable", version.ref = "playServicesWearable" }

@@ -44,6 +44,7 @@ dependencies {
     implementation(libs.activity.compose)
     implementation(libs.core.splashscreen)
     implementation(libs.coroutines.guava)
+    implementation(libs.fragment)
     implementation(libs.health.services.client)
     implementation(libs.lifecycle.runtime.ktx)
     implementation(libs.play.services.wearable)

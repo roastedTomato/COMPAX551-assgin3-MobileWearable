@@ -1,5 +1,6 @@
 package com.example.assign3.wear.watch
 
+import android.annotation.SuppressLint
 import android.Manifest
 import android.content.pm.PackageManager
 import android.hardware.Sensor
@@ -204,6 +205,7 @@ class SensorActivity : ComponentActivity(), SensorEventListener {
         }
     }
 
+    @SuppressLint("VisibleForTests")
     private fun sendHeartRateToPhone(bpm: Float) {
         val dataRequest = PutDataMapRequest.create(HEART_RATE_DATA_PATH).apply {
             dataMap.putLong("timestamp", System.currentTimeMillis())
