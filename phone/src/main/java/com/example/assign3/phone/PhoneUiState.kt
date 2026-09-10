@@ -1,7 +1,63 @@
 package com.example.assign3.phone
 
 data class PhoneUiState(
-    val accelerometerText: String = "Waiting for watch data",
-    val gyroscopeText: String = "Waiting for gyroscope data",
-    val heartRateText: String = "Waiting for heart rate data",
+    val accelerometer: AccelerometerResult? = null,
+    val gyroscope: GyroscopeResult? = null,
+    val heartRate: HeartRateResult? = null,
 )
+
+data class AccelerometerResult(
+    val x: Float,
+    val y: Float,
+    val z: Float,
+    val magnitude: Float,
+    val movementScore: Float,
+    val movementTrend: List<Float>,
+    val intensity: MotionIntensity,
+    val displayText: String,
+)
+
+data class GyroscopeResult(
+    val x: Float,
+    val y: Float,
+    val z: Float,
+    val rotationMagnitude: Float,
+    val averageRotationMagnitude: Float,
+    val rotationTrend: List<Float>,
+    val movement: RotationMovement,
+    val displayText: String,
+)
+
+data class HeartRateResult(
+    val bpm: Float,
+    val smoothedBpm: Float,
+    val zone: HeartRateZone,
+    val zoneDistribution: HeartRateDistribution,
+    val displayText: String,
+)
+
+data class HeartRateDistribution(
+    val resting: Int,
+    val moderate: Int,
+    val elevated: Int,
+) {
+    val total: Int
+        get() = resting + moderate + elevated
+}
+
+enum class MotionIntensity {
+    Low,
+    Medium,
+    High,
+}
+
+enum class RotationMovement {
+    Stable,
+    Active,
+}
+
+enum class HeartRateZone {
+    Resting,
+    Moderate,
+    Elevated,
+}

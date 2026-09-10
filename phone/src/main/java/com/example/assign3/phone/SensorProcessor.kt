@@ -1,73 +1,144 @@
 package com.example.assign3.phone
 
 import java.util.Locale
+import kotlin.math.sqrt
 
 class SensorProcessor {
-    fun processAccelerometer(readings: List<MotionReading>): String {
-        val latest = readings.lastOrNull() ?: return "Waiting for watch data"
-        val averageMagnitude = readings.takeLast(MOTION_WINDOW_SIZE).map { it.magnitude }.average()
+    fun processAccelerometer(readings: List<MotionReading>): AccelerometerResult? {
+        val latest = readings.lastOrNull() ?: return null
+        val movementScore = readings.averageMovementDelta()
         val intensity = when {
-            averageMagnitude >= HIGH_ACCELERATION_THRESHOLD -> "High"
-            averageMagnitude >= MEDIUM_ACCELERATION_THRESHOLD -> "Medium"
-            else -> "Low"
+            movementScore >= HIGH_ACCELERATION_THRESHOLD -> MotionIntensity.High
+            movementScore >= MEDIUM_ACCELERATION_THRESHOLD -> MotionIntensity.Medium
+            else -> MotionIntensity.Low
         }
 
-        return String.format(
-            Locale.US,
-            "X: %.2f  Y: %.2f  Z: %.2f\nMagnitude: %.2f\nAvg: %.2f  Intensity: %s",
-            latest.x,
-            latest.y,
-            latest.z,
-            latest.magnitude,
-            averageMagnitude,
-            intensity,
+        return AccelerometerResult(
+            x = latest.x,
+            y = latest.y,
+            z = latest.z,
+            magnitude = latest.magnitude,
+            movementScore = movementScore,
+            movementTrend = readings.rollingMovementTrend(),
+            intensity = intensity,
+            displayText = String.format(
+                Locale.US,
+                "X: %.2f  Y: %.2f  Z: %.2f\nMagnitude: %.2f\nMovement: %.2f  Intensity: %s",
+                latest.x,
+                latest.y,
+                latest.z,
+                latest.magnitude,
+                movementScore,
+                intensity,
+            ),
         )
     }
 
-    fun processGyroscope(readings: List<MotionReading>): String {
-        val latest = readings.lastOrNull() ?: return "Waiting for gyroscope data"
-        val averageMagnitude = readings.takeLast(MOTION_WINDOW_SIZE).map { it.magnitude }.average()
+    fun processGyroscope(readings: List<MotionReading>): GyroscopeResult? {
+        val latest = readings.lastOrNull() ?: return null
+        val averageMagnitude = readings.takeLast(MOTION_WINDOW_SIZE).map { it.magnitude }.average().toFloat()
         val movement = if (averageMagnitude >= ACTIVE_ROTATION_THRESHOLD) {
-            "Active"
+            RotationMovement.Active
         } else {
-            "Stable"
+            RotationMovement.Stable
         }
 
-        return String.format(
-            Locale.US,
-            "X: %.2f  Y: %.2f  Z: %.2f\nRotation: %.2f\nAvg: %.2f  Movement: %s",
-            latest.x,
-            latest.y,
-            latest.z,
-            latest.magnitude,
-            averageMagnitude,
-            movement,
+        return GyroscopeResult(
+            x = latest.x,
+            y = latest.y,
+            z = latest.z,
+            rotationMagnitude = latest.magnitude,
+            averageRotationMagnitude = averageMagnitude,
+            rotationTrend = readings.rollingMagnitudeTrend(),
+            movement = movement,
+            displayText = String.format(
+                Locale.US,
+                "X: %.2f  Y: %.2f  Z: %.2f\nRotation: %.2f\nAvg: %.2f  Movement: %s",
+                latest.x,
+                latest.y,
+                latest.z,
+                latest.magnitude,
+                averageMagnitude,
+                movement,
+            ),
         )
     }
 
-    fun processHeartRate(readings: List<HeartRateReading>): String {
-        val latest = readings.lastOrNull() ?: return "Waiting for heart rate data"
-        val smoothedBpm = readings.takeLast(HEART_RATE_WINDOW_SIZE).map { it.bpm }.average()
+    fun processHeartRate(readings: List<HeartRateReading>): HeartRateResult? {
+        val latest = readings.lastOrNull() ?: return null
+        val smoothedBpm = readings.takeLast(HEART_RATE_WINDOW_SIZE).map { it.bpm }.average().toFloat()
         val zone = when {
-            smoothedBpm >= ELEVATED_HEART_RATE_THRESHOLD -> "Elevated"
-            smoothedBpm >= MODERATE_HEART_RATE_THRESHOLD -> "Moderate"
-            else -> "Resting"
+            smoothedBpm >= ELEVATED_HEART_RATE_THRESHOLD -> HeartRateZone.Elevated
+            smoothedBpm >= MODERATE_HEART_RATE_THRESHOLD -> HeartRateZone.Moderate
+            else -> HeartRateZone.Resting
+        }
+        val distribution = readings.fold(HeartRateDistribution(0, 0, 0)) { current, reading ->
+            when {
+                reading.bpm >= ELEVATED_HEART_RATE_THRESHOLD -> current.copy(elevated = current.elevated + 1)
+                reading.bpm >= MODERATE_HEART_RATE_THRESHOLD -> current.copy(moderate = current.moderate + 1)
+                else -> current.copy(resting = current.resting + 1)
+            }
         }
 
-        return String.format(
-            Locale.US,
-            "BPM: %.0f\nSmoothed: %.0f\nZone: %s",
-            latest.bpm,
-            smoothedBpm,
-            zone,
+        return HeartRateResult(
+            bpm = latest.bpm,
+            smoothedBpm = smoothedBpm,
+            zone = zone,
+            zoneDistribution = distribution,
+            displayText = String.format(
+                Locale.US,
+                "BPM: %.0f\nSmoothed: %.0f\nZone: %s",
+                latest.bpm,
+                smoothedBpm,
+                zone,
+            ),
         )
     }
 }
 
+private fun List<MotionReading>.averageMovementDelta(): Float {
+    val recentReadings = takeLast(MOTION_WINDOW_SIZE + 1)
+    if (recentReadings.size < 2) return 0f
+
+    return recentReadings
+        .zipWithNext { previous, current -> previous.distanceTo(current) }
+        .average()
+        .toFloat()
+}
+
+private fun List<MotionReading>.rollingMovementTrend(): List<Float> {
+    val recentReadings = takeLast(CHART_WINDOW_SIZE)
+    return recentReadings.indices.map { index ->
+        recentReadings
+            .take(index + 1)
+            .averageMovementDelta()
+    }
+}
+
+private fun MotionReading.distanceTo(other: MotionReading): Float {
+    val dx = other.x - x
+    val dy = other.y - y
+    val dz = other.z - z
+    return sqrt(dx * dx + dy * dy + dz * dz)
+}
+
+private fun List<MotionReading>.rollingMagnitudeTrend(): List<Float> {
+    val recentReadings = takeLast(CHART_WINDOW_SIZE)
+    return recentReadings.indices.map { index ->
+        recentReadings
+            .take(index + 1)
+            .takeLast(MOTION_WINDOW_SIZE)
+            .map { it.magnitude }
+            .average()
+            .toFloat()
+    }
+}
+
 private const val MOTION_WINDOW_SIZE = 10
-private const val HEART_RATE_WINDOW_SIZE = 5
-private const val MEDIUM_ACCELERATION_THRESHOLD = 11.0
-private const val HIGH_ACCELERATION_THRESHOLD = 15.0
+private const val HEART_RATE_WINDOW_SIZE = 3
+private const val CHART_WINDOW_SIZE = 30
+private const val MEDIUM_ACCELERATION_THRESHOLD = 0.6
+private const val HIGH_ACCELERATION_THRESHOLD = 1.6
 private const val ACTIVE_ROTATION_THRESHOLD = 1.0
 private const val MODERATE_HEART_RATE_THRESHOLD = 90.0
 private const val ELEVATED_HEART_RATE_THRESHOLD = 120.0

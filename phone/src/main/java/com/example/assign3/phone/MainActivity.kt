@@ -22,7 +22,7 @@ class MainActivity : ComponentActivity() {
                 runOnUiThread {
                     accelerometerReadings.addReading(reading)
                     uiState.value = uiState.value.copy(
-                        accelerometerText = sensorProcessor.processAccelerometer(accelerometerReadings)
+                        accelerometer = sensorProcessor.processAccelerometer(accelerometerReadings)
                     )
                 }
             },
@@ -30,7 +30,7 @@ class MainActivity : ComponentActivity() {
                 runOnUiThread {
                     gyroscopeReadings.addReading(reading)
                     uiState.value = uiState.value.copy(
-                        gyroscopeText = sensorProcessor.processGyroscope(gyroscopeReadings)
+                        gyroscope = sensorProcessor.processGyroscope(gyroscopeReadings)
                     )
                 }
             },
@@ -38,7 +38,7 @@ class MainActivity : ComponentActivity() {
                 runOnUiThread {
                     heartRateReadings.addReading(reading)
                     uiState.value = uiState.value.copy(
-                        heartRateText = sensorProcessor.processHeartRate(heartRateReadings)
+                        heartRate = sensorProcessor.processHeartRate(heartRateReadings)
                     )
                 }
             }
@@ -69,4 +69,4 @@ private fun <T> MutableList<T>.addReading(reading: T) {
     }
 }
 
-private const val MAX_READING_HISTORY = 30
+private const val MAX_READING_HISTORY = 120

@@ -68,6 +68,7 @@ private fun WelcomeScreen(
     Box(
         modifier = modifier
             .fillMaxSize()
+            .background(Color.White)
             .padding(horizontal = 18.dp),
         contentAlignment = Alignment.Center,
     ) {
@@ -79,7 +80,7 @@ private fun WelcomeScreen(
             Text(
                 text = name,
                 textAlign = TextAlign.Center,
-                color = Color.White
+                color = Color.Black,
             )
             Spacer(modifier = Modifier.height(12.dp))
 

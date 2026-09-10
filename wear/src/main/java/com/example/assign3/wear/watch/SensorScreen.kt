@@ -43,6 +43,7 @@ fun SensorApp(
             LazyColumn(
                 modifier = Modifier
                     .fillMaxSize()
+                    .background(Color.White)
                     .padding(contentPadding)
                     .padding(horizontal = 18.dp),
                 horizontalAlignment = Alignment.CenterHorizontally,
