@@ -185,7 +185,7 @@ private fun AccelerometerSection(
     PhoneDataSection(
         title = title,
         primaryValue = result?.intensity?.name ?: "Waiting",
-        value = result?.displayText ?: "Waiting for watch data",
+        value = result?.toDisplayText() ?: "Waiting for watch data",
         primaryColor = color,
     ) {
         TimeSeriesLineChart(
@@ -210,7 +210,7 @@ private fun GyroscopeSection(
     PhoneDataSection(
         title = title,
         primaryValue = result?.movement?.name ?: "Waiting",
-        value = result?.displayText ?: "Waiting for gyroscope data",
+        value = result?.toDisplayText() ?: "Waiting for gyroscope data",
         primaryColor = color,
     ) {
         TimeSeriesLineChart(
@@ -236,7 +236,7 @@ private fun HeartRateSection(
     PhoneDataSection(
         title = title,
         primaryValue = result?.let { "${it.smoothedBpm.roundToInt()} BPM" } ?: "Waiting",
-        value = result?.displayText ?: "Waiting for heart rate data",
+        value = result?.toDisplayText() ?: "Waiting for heart rate data",
         primaryColor = color,
     ) {
         HeartRateGauge(
@@ -520,7 +520,6 @@ private fun PhoneScreenPreview() {
                     movementScore = 1.1f,
                     movementTrend = listOf(0.1f, 0.3f, 0.7f, 1.1f, 1.4f, 0.9f, 1.2f),
                     intensity = MotionIntensity.Medium,
-                    displayText = "Raw X: 0.12  Y: 9.81  Z: -0.34\nRaw magnitude: 9.82\nMovement score: 1.10  Intensity: Medium",
                 ),
                 gyroscope = GyroscopeResult(
                     x = 0.01f,
@@ -530,7 +529,6 @@ private fun PhoneScreenPreview() {
                     averageRotationMagnitude = 1.2f,
                     rotationTrend = listOf(0.2f, 0.4f, 0.7f, 1.1f, 1.2f, 0.9f, 1.5f),
                     movement = RotationMovement.Active,
-                    displayText = "Raw X: 0.01  Y: -0.02  Z: 0.03\nRotation magnitude: 0.04\nRolling avg: 1.20  Movement: Active",
                 ),
                 heartRate = HeartRateResult(
                     bpm = 96f,
@@ -541,7 +539,6 @@ private fun PhoneScreenPreview() {
                         moderate = 14,
                         elevated = 3,
                     ),
-                    displayText = "Latest BPM: 96\nSmoothed BPM: 94\nZone: Moderate",
                 ),
                 isReceivingWatchData = true,
             ),

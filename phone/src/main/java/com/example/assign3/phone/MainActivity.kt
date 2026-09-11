@@ -57,7 +57,7 @@ class MainActivity : ComponentActivity() {
             MaterialTheme {
                 PhoneScreen(
                     uiState = uiState.value,
-                    onResetSession = ::resetSession,
+                    onResetSession = ::resetPhoneSession,
                 )
             }
         }
@@ -73,11 +73,12 @@ class MainActivity : ComponentActivity() {
         super.onPause()
     }
 
-    private fun resetSession() {
+    private fun resetPhoneSession() {
         accelerometerReadings.clear()
         gyroscopeReadings.clear()
         heartRateReadings.clear()
 
+        // Reset clears the phone-side session history while keeping the latest live samples as the new baseline.
         latestAccelerometerReading?.let { accelerometerReadings.add(it) }
         latestGyroscopeReading?.let { gyroscopeReadings.add(it) }
         latestHeartRateReading?.let { heartRateReadings.add(it) }

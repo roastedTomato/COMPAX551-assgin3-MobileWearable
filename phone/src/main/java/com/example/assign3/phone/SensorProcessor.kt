@@ -1,6 +1,5 @@
 package com.example.assign3.phone
 
-import java.util.Locale
 import kotlin.math.sqrt
 
 class SensorProcessor {
@@ -21,16 +20,6 @@ class SensorProcessor {
             movementScore = movementScore,
             movementTrend = readings.rollingMovementTrend(),
             intensity = intensity,
-            displayText = String.format(
-                Locale.US,
-                "Raw X: %.2f  Y: %.2f  Z: %.2f\nRaw magnitude: %.2f\nMovement score: %.2f  Intensity: %s",
-                latest.x,
-                latest.y,
-                latest.z,
-                latest.magnitude,
-                movementScore,
-                intensity,
-            ),
         )
     }
 
@@ -51,16 +40,6 @@ class SensorProcessor {
             averageRotationMagnitude = averageMagnitude,
             rotationTrend = readings.rollingMagnitudeTrend(),
             movement = movement,
-            displayText = String.format(
-                Locale.US,
-                "Raw X: %.2f  Y: %.2f  Z: %.2f\nRotation magnitude: %.2f\nRolling avg: %.2f  Movement: %s",
-                latest.x,
-                latest.y,
-                latest.z,
-                latest.magnitude,
-                averageMagnitude,
-                movement,
-            ),
         )
     }
 
@@ -85,13 +64,6 @@ class SensorProcessor {
             smoothedBpm = smoothedBpm,
             zone = zone,
             zoneDistribution = distribution,
-            displayText = String.format(
-                Locale.US,
-                "Latest BPM: %.0f\nSmoothed BPM: %.0f\nZone: %s",
-                latest.bpm,
-                smoothedBpm,
-                zone,
-            ),
         )
     }
 }
@@ -115,6 +87,7 @@ private fun List<MotionReading>.rollingMovementTrend(): List<Float> {
     }
 }
 
+// Raw accelerometer magnitude includes gravity, so recent x/y/z change is a clearer movement feature.
 private fun MotionReading.distanceTo(other: MotionReading): Float {
     val dx = other.x - x
     val dy = other.y - y
@@ -135,6 +108,7 @@ private fun List<MotionReading>.rollingMagnitudeTrend(): List<Float> {
 }
 
 private const val MOTION_WINDOW_SIZE = 10
+// A short heart-rate window keeps the display responsive while smoothing small callback noise.
 private const val HEART_RATE_WINDOW_SIZE = 3
 private const val CHART_WINDOW_SIZE = 30
 private const val MEDIUM_ACCELERATION_THRESHOLD = 0.6

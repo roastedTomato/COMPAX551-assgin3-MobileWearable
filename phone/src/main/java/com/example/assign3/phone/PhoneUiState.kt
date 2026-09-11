@@ -15,7 +15,6 @@ data class AccelerometerResult(
     val movementScore: Float,
     val movementTrend: List<Float>,
     val intensity: MotionIntensity,
-    val displayText: String,
 )
 
 data class GyroscopeResult(
@@ -26,7 +25,6 @@ data class GyroscopeResult(
     val averageRotationMagnitude: Float,
     val rotationTrend: List<Float>,
     val movement: RotationMovement,
-    val displayText: String,
 )
 
 data class HeartRateResult(
@@ -34,7 +32,6 @@ data class HeartRateResult(
     val smoothedBpm: Float,
     val zone: HeartRateZone,
     val zoneDistribution: HeartRateDistribution,
-    val displayText: String,
 )
 
 data class HeartRateDistribution(

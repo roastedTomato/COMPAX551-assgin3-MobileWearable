@@ -34,11 +34,9 @@ import java.util.Locale
 
 
 class SensorActivity : ComponentActivity(), SensorEventListener {
-    // declares the sensor manager and measure client
     private lateinit var sensorManager: SensorManager
     private lateinit var measureClient: MeasureClient
 
-    // declares the sensors and their values
     private var accelerometer: Sensor? = null
     private var gyroscope: Sensor? = null
 
@@ -55,7 +53,6 @@ class SensorActivity : ComponentActivity(), SensorEventListener {
     private var gyroscopeZ by mutableFloatStateOf(0f)
     private var lastGyroscopeSendTime = 0L
 
-    // declares the heart rate and its values
     private var heartRateBpm by mutableFloatStateOf(0f)
     private var supportsHeartRate by mutableStateOf(false)
     private var isHeartRateAvailable by mutableStateOf(false)
@@ -69,7 +66,6 @@ class SensorActivity : ComponentActivity(), SensorEventListener {
         val healthClient = HealthServices.getClient(this)
         measureClient = healthClient.measureClient
 
-        //1.heart rate: when launch the app, check if the device supports heart rate
         lifecycleScope.launch {
             val capabilities = measureClient.getCapabilitiesAsync().await()
             supportsHeartRate =
@@ -100,7 +96,6 @@ class SensorActivity : ComponentActivity(), SensorEventListener {
             )
         }
 
-        //2.heart rate: request permission to use heart rate
         if (!hasHeartRatePermission()) {
             heartRatePermissionLauncher.launch(heartRatePermission())
         }
@@ -115,7 +110,6 @@ class SensorActivity : ComponentActivity(), SensorEventListener {
                 SensorManager.SENSOR_DELAY_NORMAL,
             )
         }
-        //3.heart rate: register heart rate measure
         registerHeartRateMeasure()
     }
 
@@ -158,6 +152,7 @@ class SensorActivity : ComponentActivity(), SensorEventListener {
 
     private fun sendAccelerometerToPhone(x: Float, y: Float, z: Float) {
         val now = SystemClock.elapsedRealtime()
+        // Motion sensors can fire frequently, so messages are rate-limited for a smoother phone display.
         if (now - lastAccelerometerSendTime < ACCELEROMETER_SEND_INTERVAL_MS) {
             return
         }
@@ -172,6 +167,7 @@ class SensorActivity : ComponentActivity(), SensorEventListener {
 
     private fun sendGyroscopeToPhone(x: Float, y: Float, z: Float) {
         val now = SystemClock.elapsedRealtime()
+        // Gyroscope uses the same lightweight message path as accelerometer because it is time-sensitive motion data.
         if (now - lastGyroscopeSendTime < GYROSCOPE_SEND_INTERVAL_MS) {
             return
         }
@@ -207,6 +203,7 @@ class SensorActivity : ComponentActivity(), SensorEventListener {
 
     @SuppressLint("VisibleForTests")
     private fun sendHeartRateToPhone(bpm: Float) {
+        // Heart rate is lower frequency, so DataClient stores it as the latest state for the phone.
         val dataRequest = PutDataMapRequest.create(HEART_RATE_DATA_PATH).apply {
             dataMap.putLong("timestamp", System.currentTimeMillis())
             dataMap.putFloat("bpm", bpm)
@@ -216,7 +213,6 @@ class SensorActivity : ComponentActivity(), SensorEventListener {
     }
 
 
-    // request permission to use heart rate
     private val heartRatePermissionLauncher =
         registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
             if (isGranted) {
@@ -241,7 +237,6 @@ class SensorActivity : ComponentActivity(), SensorEventListener {
         if (!isHeartRateRegistered) {
             return
         }
-        //Launch a coroutine within a standard function and block the current thread until cancellation completes, ensuring the execution order.
         lifecycleScope.launch {
             measureClient.unregisterMeasureCallbackAsync(
                 DataType.HEART_RATE_BPM,
@@ -251,7 +246,6 @@ class SensorActivity : ComponentActivity(), SensorEventListener {
         isHeartRateRegistered = false
     }
 
-    // callback for registering heart rate measure
     private val heartRateCallback = object : MeasureCallback {
         override fun onAvailabilityChanged(
             dataType: DeltaDataType<*, *>,

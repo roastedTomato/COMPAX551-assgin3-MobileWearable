@@ -3,6 +3,7 @@ package com.example.assign3.wear.watch
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -43,8 +44,9 @@ fun SensorApp(
                 .fillMaxSize()
                 .background(Color.White)
                 .padding(horizontal = 18.dp),
+            contentPadding = PaddingValues(vertical = 26.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(10.dp, Alignment.CenterVertically),
+            verticalArrangement = Arrangement.spacedBy(10.dp),
         ) {
             item {
                 SensorSection(
