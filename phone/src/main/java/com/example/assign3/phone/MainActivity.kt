@@ -73,6 +73,11 @@ class MainActivity : ComponentActivity() {
         super.onPause()
     }
 
+    override fun onDestroy() {
+        wearDataReceiver.stop()
+        super.onDestroy()
+    }
+
     private fun resetPhoneSession() {
         accelerometerReadings.clear()
         gyroscopeReadings.clear()

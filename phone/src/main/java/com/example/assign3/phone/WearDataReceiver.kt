@@ -14,9 +14,13 @@ class WearDataReceiver(
     private val onAccelerometerReceived: (MotionReading) -> Unit,
     private val onGyroscopeReceived: (MotionReading) -> Unit,
     private val onHeartRateReceived: (HeartRateReading) -> Unit,
+    //Google Wearable Companion SDK，
+    // messageClient(short messages, sent as one-off transmissions.)，
+    // dataClient(transmits heart rate data; suitable for synchronizing state data.)
 ) : MessageClient.OnMessageReceivedListener, DataClient.OnDataChangedListener {
-    private val messageClient = Wearable.getMessageClient(context)
-    private val dataClient = Wearable.getDataClient(context)
+    private val appContext = context.applicationContext
+    private val messageClient = Wearable.getMessageClient(appContext)
+    private val dataClient = Wearable.getDataClient(appContext)
 
     fun start() {
         messageClient.addListener(this)

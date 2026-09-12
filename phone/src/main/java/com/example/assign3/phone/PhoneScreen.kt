@@ -46,9 +46,10 @@ import kotlin.math.roundToInt
 
 @Composable
 fun PhoneScreen(
-    uiState: PhoneUiState,
-    onResetSession: () -> Unit,
+    uiState: PhoneUiState,//Read-only state received from the parent Activity; includes accelerometer and gyroscope data, heart rate results, and a flag indicating whether watch data has been received.
+    onResetSession: () -> Unit,//Callback function: notifies the upper layer to execute the session reset logic (clearing all historical readings) when the Reset button is clicked.
 ) {
+    //Local UI state is preserved using `remember` to track the currently selected sensor page: Accel, Gyro, or Heart. `mutableStateOf` creates an observable Compose variable; changes to it trigger a UI refresh.
     var selectedSensor by remember { mutableStateOf(SensorPage.Accelerometer) }
 
     Column(
@@ -150,7 +151,10 @@ private fun SensorSelector(
         SensorPage.entries.forEachIndexed { index, page ->
             SegmentedButton(
                 selected = selectedSensor == page,
+                //Tap the Gyro button → onSensorSelected(Gyroscope) → selectedSensor = Gyroscope → UI refreshes and switches to the gyroscope page.
                 onClick = { onSensorSelected(page) },
+                //Utility function for the rounded-corner shape of segmented buttons.
+                //Effect: Three buttons are joined together to form a single large rectangle with rounded corners; there are no extra rounded corners between the buttons, creating the visual impression of a continuous strip.
                 shape = SegmentedButtonDefaults.itemShape(
                     index = index,
                     count = SensorPage.entries.size,
