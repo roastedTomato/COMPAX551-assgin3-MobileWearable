@@ -56,6 +56,7 @@ class WearDataReceiver(
         }
     }
 
+    //Converts raw byte data from the watch into a `MotionReading`.
     private fun parseMotionMessage(data: ByteArray): MotionReading? {
         val message = data.toString(Charsets.UTF_8)
         val parts = message.split(",")

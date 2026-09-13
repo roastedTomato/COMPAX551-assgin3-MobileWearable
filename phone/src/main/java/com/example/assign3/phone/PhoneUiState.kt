@@ -30,10 +30,12 @@ data class GyroscopeResult(
 data class HeartRateResult(
     val bpm: Float,
     val smoothedBpm: Float,
+    val bpmTrend: List<Float>,
     val zone: HeartRateZone,
     val zoneDistribution: HeartRateDistribution,
 )
 
+//Counts how many heart rate readings fall into each zone
 data class HeartRateDistribution(
     val resting: Int,
     val moderate: Int,

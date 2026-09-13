@@ -5,7 +5,7 @@ import kotlin.math.sqrt
 class SensorProcessor {
     fun processAccelerometer(readings: List<MotionReading>): AccelerometerResult? {
         val latest = readings.lastOrNull() ?: return null
-        val movementScore = readings. averageMovementDelta()
+        val movementScore = readings.averageMovementDelta()
         val intensity = when {
             movementScore >= HIGH_ACCELERATION_THRESHOLD -> MotionIntensity.High
             movementScore >= MEDIUM_ACCELERATION_THRESHOLD -> MotionIntensity.Medium
@@ -65,6 +65,7 @@ class SensorProcessor {
         return HeartRateResult(
             bpm = latest.bpm,
             smoothedBpm = smoothedBpm,
+            bpmTrend = readings.rollingHeartRateTrend(),
             zone = zone,
             zoneDistribution = distribution,
         )
@@ -116,6 +117,18 @@ private fun List<MotionReading>.rollingMagnitudeTrend(): List<Float> {
             .take(index + 1)
             .takeLast(MOTION_WINDOW_SIZE)
             .map { it.magnitude }
+            .average()
+            .toFloat()
+    }
+}
+
+private fun List<HeartRateReading>.rollingHeartRateTrend(): List<Float> {
+    val recentReadings = takeLast(CHART_WINDOW_SIZE)
+    return recentReadings.indices.map { index ->
+        recentReadings
+            .take(index + 1)
+            .takeLast(HEART_RATE_WINDOW_SIZE)
+            .map { it.bpm }
             .average()
             .toFloat()
     }

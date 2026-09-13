@@ -243,10 +243,12 @@ private fun HeartRateSection(
         value = result?.toDisplayText() ?: "Waiting for heart rate data",
         primaryColor = color,
     ) {
-        HeartRateGauge(
-            progress = result?.smoothedBpm.asHeartRateProgress(),
-            bpm = result?.smoothedBpm,
+        TimeSeriesLineChart(
+            values = result?.bpmTrend.orEmpty(),
+            min = HEART_RATE_MIN,
+            max = HEART_RATE_MAX,
             color = color,
+            yLabel = "Smoothed BPM (40-180)",
         )
         Spacer(modifier = Modifier.height(8.dp))
         ZoneDistributionBar(distribution = result?.zoneDistribution)
@@ -300,6 +302,7 @@ private fun PhoneDataSection(
 @Composable
 private fun TimeSeriesLineChart(
     values: List<Float>,
+    min: Float = 0f,
     max: Float,
     color: Color,
     yLabel: String,
@@ -320,7 +323,7 @@ private fun TimeSeriesLineChart(
                 horizontalAlignment = Alignment.End,
             ) {
                 Text(text = max.axisLabel(), color = Color.Black, fontSize = 12.sp)
-                Text(text = "0", color = Color.Black, fontSize = 12.sp)
+                Text(text = min.axisLabel(), color = Color.Black, fontSize = 12.sp)
             }
 
             Canvas(
@@ -340,7 +343,8 @@ private fun TimeSeriesLineChart(
 
                 if (values.isEmpty()) return@Canvas
 
-                val chartValues = values.map { value -> (value / max).coerceIn(0f, 1f) }
+                val range = (max - min).coerceAtLeast(1f)
+                val chartValues = values.map { value -> ((value - min) / range).coerceIn(0f, 1f) }
                 if (chartValues.size == 1) {
                     val y = size.height - chartValues.first() * size.height
                     drawCircle(color = color, radius = 5.dp.toPx(), center = Offset(size.width, y))
@@ -386,50 +390,6 @@ private fun Float.axisLabel(): String {
         roundToInt().toString()
     } else {
         String.format(Locale.US, "%.1f", this)
-    }
-}
-
-@Composable
-private fun HeartRateGauge(
-    progress: Float,
-    bpm: Float?,
-    color: Color,
-) {
-    Box(
-        modifier = Modifier.size(116.dp),
-        contentAlignment = Alignment.Center,
-    ) {
-        Canvas(modifier = Modifier.size(104.dp)) {
-            val strokeWidth = 12.dp.toPx()
-            val arcSize = Size(size.width - strokeWidth, size.height - strokeWidth)
-            val topLeft = Offset(strokeWidth / 2, strokeWidth / 2)
-
-            drawArc(
-                color = Color.White,
-                startAngle = -90f,
-                sweepAngle = 360f,
-                useCenter = false,
-                topLeft = topLeft,
-                size = arcSize,
-                style = Stroke(width = strokeWidth, cap = StrokeCap.Round),
-            )
-            drawArc(
-                color = color,
-                startAngle = -90f,
-                sweepAngle = 360f * progress,
-                useCenter = false,
-                topLeft = topLeft,
-                size = arcSize,
-                style = Stroke(width = strokeWidth, cap = StrokeCap.Round),
-            )
-        }
-        Text(
-            text = bpm?.roundToInt()?.toString() ?: "--",
-            color = Color.Black,
-            fontSize = 24.sp,
-            fontWeight = FontWeight.Bold,
-            textAlign = TextAlign.Center,
-        )
     }
 }
 
@@ -491,11 +451,6 @@ private fun ZoneLabel(
     )
 }
 
-private fun Float?.asHeartRateProgress(): Float {
-    return (((this ?: HEART_RATE_MIN) - HEART_RATE_MIN) / (HEART_RATE_MAX - HEART_RATE_MIN))
-        .coerceIn(0f, 1f)
-}
-
 private val CalmGreen = Color(0xFF2E7D32)
 private val Amber = Color(0xFFF9A825)
 private val AlertRed = Color(0xFFC62828)
@@ -537,6 +492,7 @@ private fun PhoneScreenPreview() {
                 heartRate = HeartRateResult(
                     bpm = 96f,
                     smoothedBpm = 94f,
+                    bpmTrend = listOf(72f, 78f, 84f, 88f, 91f, 94f, 99f, 104f, 96f, 94f),
                     zone = HeartRateZone.Moderate,
                     zoneDistribution = HeartRateDistribution(
                         resting = 8,
