@@ -73,7 +73,7 @@ class SensorProcessor {
 }
 
 //Calculating the average distance between all adjacent frames yields the `movementScore`,
-//which represents the intensity of body shaking or movement.
+//which represents the intensity of shaking or movement.
 private fun List<MotionReading>.averageMovementDelta(): Float {
     val recentReadings = takeLast(MOTION_WINDOW_SIZE + 1)
     if (recentReadings.size < 2) return 0f

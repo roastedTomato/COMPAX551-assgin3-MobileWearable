@@ -1,12 +1,15 @@
 package com.example.assign3.phone
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.mutableStateOf
 
 class MainActivity : ComponentActivity() {
+    private val mainHandler = Handler(Looper.getMainLooper())
     private val uiState = mutableStateOf(PhoneUiState())
     private val sensorProcessor = SensorProcessor()
     private val accelerometerReadings = mutableListOf<MotionReading>()
@@ -15,7 +18,18 @@ class MainActivity : ComponentActivity() {
     private var latestAccelerometerReading: MotionReading? = null
     private var latestGyroscopeReading: MotionReading? = null
     private var latestHeartRateReading: HeartRateReading? = null
+    private var lastWatchDataReceivedAt = 0L
     private lateinit var wearDataReceiver: WearDataReceiver
+    private val staleWatchDataCheck = object : Runnable {
+        override fun run() {
+            val elapsed = System.currentTimeMillis() - lastWatchDataReceivedAt
+            if (lastWatchDataReceivedAt > 0L && elapsed >= WATCH_DATA_STALE_TIMEOUT_MS) {
+                uiState.value = uiState.value.copy(connectionState = WatchConnectionState.Stale)
+            } else {
+                scheduleStaleWatchDataCheck()
+            }
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,31 +37,43 @@ class MainActivity : ComponentActivity() {
             context = this,
             onAccelerometerReceived = { reading ->
                 runOnUiThread {
+                    if (!reading.isNewerThan(latestAccelerometerReading)) {
+                        return@runOnUiThread
+                    }
+                    markWatchDataReceived()
                     latestAccelerometerReading = reading
                     accelerometerReadings.addReading(reading)
                     uiState.value = uiState.value.copy(
                         accelerometer = sensorProcessor.processAccelerometer(accelerometerReadings),
-                        isReceivingWatchData = true,
+                        connectionState = WatchConnectionState.Receiving,
                     )
                 }
             },
             onGyroscopeReceived = { reading ->
                 runOnUiThread {
+                    if (!reading.isNewerThan(latestGyroscopeReading)) {
+                        return@runOnUiThread
+                    }
+                    markWatchDataReceived()
                     latestGyroscopeReading = reading
                     gyroscopeReadings.addReading(reading)
                     uiState.value = uiState.value.copy(
                         gyroscope = sensorProcessor.processGyroscope(gyroscopeReadings),
-                        isReceivingWatchData = true,
+                        connectionState = WatchConnectionState.Receiving,
                     )
                 }
             },
             onHeartRateReceived = { reading ->
                 runOnUiThread {
+                    if (!reading.isNewerThan(latestHeartRateReading)) {
+                        return@runOnUiThread
+                    }
+                    markWatchDataReceived()
                     latestHeartRateReading = reading
                     heartRateReadings.addReading(reading)
                     uiState.value = uiState.value.copy(
                         heartRate = sensorProcessor.processHeartRate(heartRateReadings),
-                        isReceivingWatchData = true,
+                        connectionState = WatchConnectionState.Receiving,
                     )
                 }
             }
@@ -66,14 +92,17 @@ class MainActivity : ComponentActivity() {
     override fun onResume() {
         super.onResume()
         wearDataReceiver.start()
+        scheduleStaleWatchDataCheck()
     }
 
     override fun onPause() {
+        mainHandler.removeCallbacks(staleWatchDataCheck)
         wearDataReceiver.stop()
         super.onPause()
     }
 
     override fun onDestroy() {
+        mainHandler.removeCallbacks(staleWatchDataCheck)
         wearDataReceiver.stop()
         super.onDestroy()
     }
@@ -92,11 +121,43 @@ class MainActivity : ComponentActivity() {
             accelerometer = sensorProcessor.processAccelerometer(accelerometerReadings),
             gyroscope = sensorProcessor.processGyroscope(gyroscopeReadings),
             heartRate = sensorProcessor.processHeartRate(heartRateReadings),
-            isReceivingWatchData = latestAccelerometerReading != null ||
-                latestGyroscopeReading != null ||
-                latestHeartRateReading != null,
+            connectionState = currentConnectionState(),
         )
     }
+
+    private fun markWatchDataReceived() {
+        lastWatchDataReceivedAt = System.currentTimeMillis()
+        scheduleStaleWatchDataCheck()
+    }
+
+    private fun scheduleStaleWatchDataCheck() {
+        mainHandler.removeCallbacks(staleWatchDataCheck)
+        mainHandler.postDelayed(staleWatchDataCheck, WATCH_DATA_STALE_TIMEOUT_MS)
+    }
+
+    private fun currentConnectionState(): WatchConnectionState {
+        val hasReceivedData = latestAccelerometerReading != null ||
+            latestGyroscopeReading != null ||
+            latestHeartRateReading != null
+        if (!hasReceivedData) {
+            return WatchConnectionState.Waiting
+        }
+
+        val elapsed = System.currentTimeMillis() - lastWatchDataReceivedAt
+        return if (elapsed >= WATCH_DATA_STALE_TIMEOUT_MS) {
+            WatchConnectionState.Stale
+        } else {
+            WatchConnectionState.Receiving
+        }
+    }
+}
+
+private fun MotionReading.isNewerThan(previous: MotionReading?): Boolean {
+    return previous == null || timestamp >= previous.timestamp
+}
+
+private fun HeartRateReading.isNewerThan(previous: HeartRateReading?): Boolean {
+    return previous == null || timestamp >= previous.timestamp
 }
 
 private fun <T> MutableList<T>.addReading(reading: T) {
@@ -107,3 +168,4 @@ private fun <T> MutableList<T>.addReading(reading: T) {
 }
 
 private const val MAX_READING_HISTORY = 120
+private const val WATCH_DATA_STALE_TIMEOUT_MS = 5_000L

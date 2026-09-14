@@ -79,7 +79,7 @@ fun PhoneScreen(
             onSensorSelected = { selectedSensor = it },
         )
         SessionStatusRow(
-            isReceiving = uiState.isReceivingWatchData,
+            connectionState = uiState.connectionState,
             onResetSession = onResetSession,
         )
 
@@ -112,9 +112,20 @@ fun PhoneScreen(
 
 @Composable
 private fun SessionStatusRow(
-    isReceiving: Boolean,
+    connectionState: WatchConnectionState,
     onResetSession: () -> Unit,
 ) {
+    val statusText = when (connectionState) {
+        WatchConnectionState.Waiting -> "Waiting for watch"
+        WatchConnectionState.Receiving -> "Receiving watch data"
+        WatchConnectionState.Stale -> "Connection stale"
+    }
+    val statusColor = when (connectionState) {
+        WatchConnectionState.Waiting -> Color(0xFF666666)
+        WatchConnectionState.Receiving -> CalmGreen
+        WatchConnectionState.Stale -> Amber
+    }
+
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -123,8 +134,8 @@ private fun SessionStatusRow(
         horizontalArrangement = Arrangement.SpaceBetween,
     ) {
         Text(
-            text = if (isReceiving) "Receiving watch data" else "Waiting for watch",
-            color = if (isReceiving) CalmGreen else Color(0xFF666666),
+            text = statusText,
+            color = statusColor,
             fontSize = 14.sp,
             fontWeight = FontWeight.Bold,
         )
@@ -500,7 +511,7 @@ private fun PhoneScreenPreview() {
                         elevated = 3,
                     ),
                 ),
-                isReceivingWatchData = true,
+                connectionState = WatchConnectionState.Receiving,
             ),
             onResetSession = {},
         )

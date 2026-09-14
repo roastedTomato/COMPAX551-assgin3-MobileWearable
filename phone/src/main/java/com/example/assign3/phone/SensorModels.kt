@@ -1,5 +1,6 @@
 package com.example.assign3.phone
 
+//defines the raw data shapes
 data class MotionReading(
     val timestamp: Long,
     val x: Float,

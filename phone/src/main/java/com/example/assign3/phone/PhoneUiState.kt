@@ -1,10 +1,11 @@
 package com.example.assign3.phone
 
+//stores the current UI-ready state for the phone screen.
 data class PhoneUiState(
     val accelerometer: AccelerometerResult? = null,
     val gyroscope: GyroscopeResult? = null,
     val heartRate: HeartRateResult? = null,
-    val isReceivingWatchData: Boolean = false,
+    val connectionState: WatchConnectionState = WatchConnectionState.Waiting,
 )
 
 data class AccelerometerResult(
@@ -60,4 +61,10 @@ enum class HeartRateZone {
     Resting,
     Moderate,
     Elevated,
+}
+
+enum class WatchConnectionState {
+    Waiting,
+    Receiving,
+    Stale,
 }
