@@ -131,7 +131,7 @@ class MainActivity : ComponentActivity() {
     }
 
     private fun scheduleStaleWatchDataCheck() {
-        mainHandler.removeCallbacks(staleWatchDataCheck)
+        mainHandler.removeCallbacks(staleWatchDataCheck)//Prevent the accumulation of multiple detection tasks. Whenever new data is received, the existing countdown is cancelled and the timer restarts.
         mainHandler.postDelayed(staleWatchDataCheck, WATCH_DATA_STALE_TIMEOUT_MS)
     }
 

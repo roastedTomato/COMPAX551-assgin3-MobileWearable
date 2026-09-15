@@ -354,6 +354,7 @@ private fun TimeSeriesLineChart(
 
                 if (values.isEmpty()) return@Canvas
 
+                //normalisation
                 val range = (max - min).coerceAtLeast(1f)
                 val chartValues = values.map { value -> ((value - min) / range).coerceIn(0f, 1f) }
                 if (chartValues.size == 1) {

@@ -11,6 +11,7 @@ import android.health.connect.HealthPermissions
 import android.os.Build
 import android.os.Bundle
 import android.os.SystemClock
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.compose.setContent
@@ -191,13 +192,20 @@ class SensorActivity : ComponentActivity(), SensorEventListener {
         ).toByteArray(Charsets.UTF_8)
 
         Wearable.getNodeClient(this).connectedNodes.addOnSuccessListener { nodes ->
+            if (nodes.isEmpty()) {
+                Log.w(TAG, "No connected phone nodes available for $path")
+            }
             nodes.forEach { node ->
                 Wearable.getMessageClient(this).sendMessage(
                     node.id,
                     path,
                     payload,
-                )
+                ).addOnFailureListener { error ->
+                    Log.w(TAG, "Failed to send motion data to ${node.displayName}", error)
+                }
             }
+        }.addOnFailureListener { error ->
+            Log.w(TAG, "Failed to get connected phone nodes", error)
         }
     }
 
@@ -210,6 +218,9 @@ class SensorActivity : ComponentActivity(), SensorEventListener {
         }.asPutDataRequest().setUrgent()
 
         Wearable.getDataClient(this).putDataItem(dataRequest)
+            .addOnFailureListener { error ->
+                Log.w(TAG, "Failed to send heart rate data", error)
+            }
     }
 
 
@@ -287,3 +298,4 @@ private const val GYROSCOPE_MESSAGE_PATH = "/motion/gyroscope"
 private const val HEART_RATE_DATA_PATH = "/health/heart_rate"
 private const val ACCELEROMETER_SEND_INTERVAL_MS = 500L
 private const val GYROSCOPE_SEND_INTERVAL_MS = 500L
+private const val TAG = "SensorActivity"
