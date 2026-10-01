@@ -26,3 +26,22 @@ build/
 
 # macOS
 .DS_Store
+
+# Coursework documents and local notes
+*.md
+!README.md
+*.pdf
+*.doc
+*.docx
+*.ppt
+*.pptx
+*.zip
+
+# Local credentials and signing files
+.env
+.env.*
+!.env.example
+*.jks
+*.keystore
+*.pem
+*.key
